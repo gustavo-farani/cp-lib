@@ -1,3 +1,6 @@
+#include <vector>
+#include <tuple>
+using namespace std;
 #define pb push_back
 #define x first
 #define y second
