@@ -1,24 +1,36 @@
-#include <set>
 #include <vector>
-#include <climits>
+#include <queue>
 using namespace std;
 
+template <typename T>
 struct MedianHeap {
-    set<int> scr;  // scr is NOT a multiset, i.e., it doesn't admit repeated elements
-    int median;    // when scr.size() is even, the median
-    // is chosen as the leftmost element of the central pair
-    void insert (int x) {
-        if (scr.insert(x).second) {
-            if (scr.size() > 1) {
-                switch (scr.size() & 1) {  // new parity of scr.size()
-                    case 0:
-                        if (x < median) median = *prev(scr.lower_bound(median));
-                        break;
-                    case 1:
-                        if (x > median) median = *scr.upper_bound(median);
-                        break;
-                }
-            } else median = x;
+    priority_queue<T> left; // Max Heap
+    priority_queue< T, vector<T>, greater<T> > right; // Min Heap
+    int size () { return left.size() + right.size(); }
+    void push (T x) {
+        if (!size()) {  // empty
+            left.push(x);
+        } else if (size() & 1) {   // odd
+            if (x < left.top()) {
+                right.push(left.top());
+                left.pop();
+                left.push(x);
+            } else {
+                right.push(x);
+            }
+        } else {  // even
+            if (!(left.top() < x)) {
+                left.push(x);
+            } else {
+                right.push(x);
+                left.push(right.top());
+                right.pop();
+            }
         }
+    }
+    T median () {
+        return left.top();
+        // NOTE: when size() is even, the method can be easily
+        // addapted to return make_pair(left.top(), right.top())
     }
 };
