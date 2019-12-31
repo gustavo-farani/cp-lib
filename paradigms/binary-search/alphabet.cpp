@@ -5,21 +5,18 @@ using namespace std;
 #define pb push_back
 
 template<typename T>
-struct Alphabet { // Offline Position Query (useful for coordinate compression)
+struct Alphabet {   // Offline Position Query (useful for coordinate compression)
     vector<T> o;
     int sz;
-    void add (T x) { o.pb(x); }
-    void build () {
+    void push (T x) { o.pb(x); }
+    int build () {   // returns number of distinct elements
         sort(o.begin(), o.end());
-        sz = unique(o.begin(), o.end()) - o.begin();
+        return sz = unique(o.begin(), o.end()) - o.begin();
     }
-    int rank (T x) {
+    int rank (T x) {   // 1-based
         auto it = lower_bound(o.begin(), o.begin() + sz, x);
         int i = (it - o.begin());
-        if (i == sz || x < o[i]) {
-            return -1;
-        } else {
-            return i + 1;
-        }
+        return (i == sz || x < o[i] ? -1 : i + 1);
     }
+    T operator[] (int i) { return o[i - 1]; }  // 1-based
 };
