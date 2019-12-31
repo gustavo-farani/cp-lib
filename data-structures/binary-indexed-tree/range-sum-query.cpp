@@ -4,10 +4,10 @@ using namespace std;
 typedef long long ll;
 
 template <typename T>
-struct RangeSum {
+struct RSQBIT {   // Range Sum Query Binary Indexed Tree
     vector<T> bit;
     int n;
-    RangeSum (int n) :
+    RSQBIT (int n) :
         bit(n + 1, 0),
         n(n)
     {}
