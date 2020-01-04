@@ -5,7 +5,7 @@ using namespace std;
 #define pb push_back
 
 template<typename T>
-struct Alphabet {   // Offline Position Query (useful for coordinate compression)
+struct Universe {   // Offline Position Query
     vector<T> o;
     int sz;
     void push (T x) { o.pb(x); }
