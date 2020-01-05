@@ -1,4 +1,4 @@
-#include "fast-exponentiation.cpp"
+#include "../fast-exponentiation.cpp"
 
 typedef long long ll;
 int MOD;    // it is suitable to use MOD as a global variable/constant
