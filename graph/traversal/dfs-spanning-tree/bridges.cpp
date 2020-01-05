@@ -26,11 +26,10 @@ struct Graph {          // bridges in an undirected and possibly disconnected gr
         adj[u].pb(v);
         adj[v].pb(u);
     }
-    vector<ii> bridges () {
+    void findBridges () {
         for (int i = 1; i <= n; i++) {
             if (pre[i] == 0) dfs(i, i);
         }
-        return b;
     }
     void dfs (int u, int par) {
         low[u] = pre[u] = ++cnt;
