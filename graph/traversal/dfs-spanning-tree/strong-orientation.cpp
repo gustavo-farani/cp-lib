@@ -26,8 +26,9 @@ struct Graph {           // strong orientation in an undirected connected graph
         adj[u].pb(v);
         adj[v].pb(u);
     }
-    void findStrongOrientation () {
+    vector<ii> strongOrientation () {
         dfs(r, r);
+        return edges;
     }
     void dfs (int u, int par) {
         low[u] = pre[u] = ++cnt;

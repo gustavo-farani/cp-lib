@@ -12,7 +12,7 @@ struct Digraph {                // directed graph
     int n, cnt;
     vector<vi> adj;
     vi pre, low;
-    vector<vi> p;               // partition of the vertices
+    vector<vi> scc;             // Strongly Connected Components (partition of the vertices set)
     stack<int> s;
     vector<bool> on;
     Digraph (int n) :           // 1-based
@@ -22,17 +22,17 @@ struct Digraph {                // directed graph
     void addEdge (int u, int v) {
         adj[u].pb(v);
     }
-    int scc () {                // build and counts strongly connected components
+    int stronglyConnectedComponents () {
         for (int i = 1; i <= n; i++) {
             if (pre[i] == 0) dfs(i, i);
         }
-        return p.size();
+        return scc.size();
     }
     DAG condensationGraph () {
-        int k = scc();
+        int k = stronglyConnectedComponents();
         vi rep(n + 1);
         for (int i = 1; i <= k; i++) {
-            for (int u : p[i - 1]) rep[u] = i;
+            for (int u : scc[i - 1]) rep[u] = i;
         }
         vector<ii> edges;
         for (int u = 1; u <= n; u++) {
@@ -56,11 +56,11 @@ struct Digraph {                // directed graph
             if (on[v]) low[u] = min(low[u], low[v]);
         }
         if (low[u] == pre[u]) {
-            p.pb(vi());
+            scc.pb(vi());
             bool end = false;
             while (!end) {
                 int v = s.top();
-                p.back().pb(v);
+                scc.back().pb(v);
                 s.pop();
                 on[v] = false;
                 end = (u == v);

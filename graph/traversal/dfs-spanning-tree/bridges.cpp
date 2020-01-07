@@ -17,7 +17,7 @@ struct Graph {          // bridges in an undirected and possibly disconnected gr
         pre[v], for all v such that (u, v) is a back edge
         low[v], for all v such that (u, v) is a tree edge
     } */
-    vector<ii> b;       // list of decteded bridges
+    vector<ii> edges;   // list of decteded bridges
     Graph (int n) :     // 1-based
         n(n), adj(n + 1), pre(n + 1),
         cnt(0), low(n + 1)
@@ -26,10 +26,11 @@ struct Graph {          // bridges in an undirected and possibly disconnected gr
         adj[u].pb(v);
         adj[v].pb(u);
     }
-    void findBridges () {
+    vector<ii>& bridges () {
         for (int i = 1; i <= n; i++) {
             if (pre[i] == 0) dfs(i, i);
         }
+        return edges;
     }
     void dfs (int u, int par) {
         low[u] = pre[u] = ++cnt;
@@ -37,7 +38,7 @@ struct Graph {          // bridges in an undirected and possibly disconnected gr
             if (pre[v] == 0) {               // tree-edge
                 dfs(v, u);
                 if (low[v] > pre[u]) {
-                    b.pb({u, v});            // detected bridge
+                    edges.pb({u, v});            // detected bridge
                 }
                 low[u] = min(low[u], low[v]);
             } else if (v != par) {           // back-edge or forward edge
