@@ -22,14 +22,14 @@ struct Digraph {                // directed graph
     void addEdge (int u, int v) {
         adj[u].pb(v);
     }
-    int stronglyConnectedComponents () {
+    vector<vi>& stronglyConnectedComponents () {
         for (int i = 1; i <= n; i++) {
             if (pre[i] == 0) dfs(i, i);
         }
-        return scc.size();
+        return scc;
     }
     DAG condensationGraph () {
-        int k = stronglyConnectedComponents();
+        stronglyConnectedComponents();
         vi rep(n + 1);
         for (int i = 1; i <= k; i++) {
             for (int u : scc[i - 1]) rep[u] = i;
@@ -42,9 +42,7 @@ struct Digraph {                // directed graph
         }
         int m = unique(edges.begin(), edges.end()) - edges.begin();
         DAG c(k);
-        for (int i = 0; i < m; i++) {
-            c.addEdge(edges[i].first, edges[i].second);
-        }
+        while (m--) c.addEdge(edges[i].first, edges[i].second);
         return c;
     }
     void dfs (int u, int par) {
