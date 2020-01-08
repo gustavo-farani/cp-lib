@@ -1,5 +1,6 @@
 #include <vector>
 #include <deque>
+#include <algorithm>
 #include "../topological-sort/kahn.cpp"   // DAG class
 using namespace std;
 
@@ -60,7 +61,7 @@ struct Digraph {
         }
         int m = unique(edges.begin(), edges.end()) - edges.begin();
         DAG c(scc.size());
-        while (m--) c.addEdge(edges[i].first, edges[i].second);
+        while (m--) c.addEdge(edges[m].first, edges[m].second);
         return c;
     }
 };
