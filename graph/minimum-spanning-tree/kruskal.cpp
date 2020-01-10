@@ -7,25 +7,29 @@ using namespace std;
 #define pb push_back
 typedef pair< int, pair<int, int> > iii;
 
-struct Graph {      // connected undirected weighted graph
+struct Graph {      // possibly not connected graph
     int n;
-    vector<iii> edges;
+    vector<iii> edges;    // weighted edge list
     Graph (int n) : n(n) {}
     void addEdge (int u, int v, int w) {
-        edges.pb({w, {u, v}});
+        edges.pb({w, {u, v}});  // undirected
     }
-    vector<iii> minimumSpanningTree () { // returns MST in edge list representation
+    vector<iii> minimumSpanningTree () { // Kruskal's Algorithm
         vector<iii> mst;
         DSU forest(n);
         sort(edges.begin(), edges.end());
-        for (int i = 0; mst.size() < n - 1; i++) {
+        for (iii &e : edges) {
             int u, v;
-            tie (u, v) = edges[i].second;
+            tie (u, v) = e.second;
             if (!forest.tied(u, v)) {
-                mst.pb(edges[i]);
+                mst.pb(e);
                 forest.merge(u, v);
             }
         }
-        return mst;
+        if (mst.size() == n - 1) {
+            return mst;
+        } else {
+            throw -1;    // not a connected graph
+        }
     }
 };
