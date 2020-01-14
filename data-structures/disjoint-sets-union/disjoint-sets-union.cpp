@@ -10,14 +10,14 @@ struct DSU {
     DSU (int n) : n(n), par(1), sz(n + 1, 1) { // 1-based
         for (int i = 1; i <= n; i++) par.pb(i);
     }
-    int find (int u) {
+    int find (int u) {  // representative upon u's EC
         if (par[u] == u) {
             return u;
         } else {
             return par[u] = find(par[u]);
         }
     }
-    void merge (int u, int v) {
+    void merge (int u, int v) { // unify (permanently) two EC's
         u = find(u);
         v = find(v);
         if (u != v) {
@@ -27,9 +27,9 @@ struct DSU {
             sz[u] += sz[v];
         }
     }
-    bool tied (int u, int v) {
+    bool tied (int u, int v) {  // whether u and v are in the same EC
         return (find(u) == find(v));
     }
-    int count (int u) { return sz[find(u)]; }
-    int size () { return n; }
+    int count (int u) { return sz[find(u)]; }  // number of members in u's EC
+    int size () { return n; }  // number of separate trees in forest
 };
