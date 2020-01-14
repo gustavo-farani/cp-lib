@@ -7,9 +7,9 @@ struct Node {
 } NIL;
 
 template<class T>
-struct SegTree {
+struct SegmentTree {
     vector<Node> tree;
-    SegTree (int n) :   // 0-based
+    SegmentTree (int n) :
         tree(n << 2, NIL)
     {}
     void update (int i, int l, int r, int p, T x) {
@@ -19,10 +19,10 @@ struct SegTree {
             tree[i].leaf(x);
         } else {
             int m = (l + r) >> 1;
-            int fe = i << 1, fd = (i << 1) + 1;
-            update(fe, l, m, p, x);
-            update(fd, m + 1, r, p, x);
-            tree[i] = tree[fe] + tree[fd];
+            int lc = i << 1, rc = (i << 1) + 1;
+            update(lc, l, m, p, x);
+            update(rc, m + 1, r, p, x);
+            tree[i] = tree[lc] + tree[rc];
         }
     }
     Node query (int i, int l, int r, int ql, int qr) {
@@ -32,8 +32,8 @@ struct SegTree {
             return tree[i];
         } else {
             int m = (l + r) >> 1;
-            int fe = i << 1, fd = (i << 1) + 1;
-            return query(fe, l, m, ql, qr) + query(fd, m + 1, r, ql, qr);
+            int lc = i << 1, rc = (i << 1) + 1;
+            return query(lc, l, m, ql, qr) + query(rc, m + 1, r, ql, qr);
         }
     }
 };
