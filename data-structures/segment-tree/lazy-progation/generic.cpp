@@ -5,14 +5,14 @@ typedef long long ll;
 
 struct Node {
     Node operator+ (const Node &o);
-    void assign (ll x, int l, int r);
+    void assign (ll x, int l, int r) {}
 } NIL;
 
 struct Todo {
-    bool empty();
-    void pop();
-    void push (ll x);
-    ll top();
+    bool empty () {}
+    void pop () {}
+    void push (ll x) {}
+    ll top () {}
 };
 
 template<class T>
