@@ -5,14 +5,15 @@ using namespace std;
 #define pb push_back
 
 template<typename T>
-struct Universe {   // Offline Position Query
+struct CoordinateCompression {
     vector<T> o;
-    void push (const T &x) { o.pb(x); }
-    void build () {
+    void operator+= (const T &x) { o.pb(x); }
+    int build () {
         sort(o.begin(), o.end());
         o.resize(unique(o.begin(), o.end()) - o.begin());
+        return o.size();
     }
-    int find (const T &x) {   // 0-based
+    int operator() (const T &x) {   // 0-based
         auto it = lower_bound(o.begin(), o.end(), x);
         return (it == o.end() || x < *it ? -1 : it - o.begin());
     }
