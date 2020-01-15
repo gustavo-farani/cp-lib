@@ -14,10 +14,10 @@ struct Todo {
     bool status;
     int val;
     bool empty () { return !status; }
-    void pop () {status = false; }
+    void pop () { status = false; }
     void push (int x) {
         status = true;
         val = x;
     }
-    bool top () { return val; }
+    int top () { return val; }
 };
