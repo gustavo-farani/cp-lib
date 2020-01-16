@@ -8,9 +8,9 @@ typedef vector<int> vi;
 struct LCA {
     vector<vi> adj, st;
     vi pre, lvl, euler, lg;
-    LCA (int n) :  // 0-based
-        adj(n), pre(n), lvl(n),
-        st((n << 1) - 1), lg(n << 1)
+    LCA (int n) :
+        adj(n + 1), pre(n + 1), lvl(n + 1), // 1-based
+        st((n << 1) - 1), lg(n << 1)  // sparse table: 0-based
     {}
     void addEdge (int u, int v) {
         adj[u].pb(v);
@@ -31,7 +31,7 @@ struct LCA {
         return (lvl[u] <= lvl[v] ? u : v);
     }
     void build () {
-        dfs(0, 0);
+        dfs(1, 1);
         int m = euler.size();  // 2*(n - 1) + 1
         for (int i = 2; i <= m; i++) {
             lg[i] = lg[i >> 1] + 1;
