@@ -11,15 +11,15 @@ struct ModBase {
         if (ans >= MOD) ans -= MOD;
         return ans;
     }
-    ModBase operator- (modBase o) {
+    ModBase operator- (ModBase o) {
         int ans = val + MOD - o.val;
         if (ans >= MOD) ans -= MOD;
         return ans;
     }
-    ModBase operator* (modBase o) {
+    ModBase operator* (ModBase o) {
         return (ll) val * o.val % MOD;
     }
-    ModBase operator/ (modBase o) {
+    ModBase operator/ (ModBase o) {
         return *this * fExp(o, MOD - 2);
     }
 };
