@@ -4,7 +4,7 @@ using namespace std;
 typedef long long ll;
 typedef pair<ll, ll> pll;
 
-pll eea (ll a, ll b) {
+ll eea (ll a, ll b, ll &x, ll &y) {
 	ll r[] = {a, b};
 	ll q[] = {-1, -1};
 	ll m[] = {1, 0};
@@ -18,5 +18,7 @@ pll eea (ll a, ll b) {
 		cur = !cur;
 		prev = !prev;
 	}
-    return {m[cur], n[cur]};
+	x = m[cur];
+	y = n[cur];
+    return r[cur];
 }
