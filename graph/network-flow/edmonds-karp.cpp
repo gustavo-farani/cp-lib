@@ -20,16 +20,14 @@ struct FlowNetwork {
         // flow(n, vector<ll>(n)),
         adj(n), pred(n), neck(n)
     {}
-    void addDirectedEdge (int u, int v, ll c) {  // assumes edge (v, u) is absent
-        adj[u].pb(v);
-        adj[v].pb(u);
-        res[u][v] = c;
-    }
-    void addUndirectedEdge (int u, int v, ll c) {
-        // The adjacency list must be symmetric even if
-        // antiparallel edges are disallowed
-        addDirectedEdge(u, v, c);
-        res[v][u] = c;
+    // calling addEdge(u, v, w) and addEdge(v, u, w) for undirected edge
+    // won't throw an error; multiple edges are also accepted
+    void addEdge (int u, int v, ll w) {
+        if (res[u][v] == 0 && res[v][u] == 0) {
+            adj[u].pb(v);
+            adj[v].pb(u);
+        }
+        res[u][v] += w;
     }
     bool augmentingPath (int s, int t) {   // Edmonds-Karp BFS
         bool exists = false;
