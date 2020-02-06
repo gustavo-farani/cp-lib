@@ -5,11 +5,10 @@ using namespace std;
 #define pb push_back
 typedef vector<int> vi;
 
-struct LCA {
-    int r;
+struct Tree {
     vector<vi> adj, st;
     vi pre, lvl, euler, lg;
-    LCA (int n, int r) :
+    Tree (int n) :
         adj(n + 1), pre(n + 1), lvl(n + 1), // 1-based
         st((n << 1) - 1), lg(n << 1)  // sparse table: 0-based
     {}
@@ -31,7 +30,7 @@ struct LCA {
     int merge (int u, int v) {
         return (lvl[u] <= lvl[v] ? u : v);
     }
-    void build () {
+    void build (int r) {
         dfs(r, r);
         int m = euler.size();  // 2*(n - 1) + 1
         for (int i = 2; i <= m; i++) {
