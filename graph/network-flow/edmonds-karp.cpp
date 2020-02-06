@@ -8,7 +8,7 @@ using namespace std;
 typedef vector<int> vi;
 typedef long long ll;
 
-const int INF = 1e18;
+const ll INF = 1e18;
 
 struct FlowNetwork {
     vector<vi> adj;
