@@ -3,23 +3,23 @@
 typedef long long ll;
 int MOD;    // it is suitable to use MOD as a global variable/constant
 
-struct ModBase {
+struct modBase {
     int val;
-    ModBase (int val) : val(val) {}
-    ModBase operator+ (ModBase o) {
+    modBase (int val) : val(val) {}
+    modBase operator+ (modBase o) {
         int ans = val + o.val;
         if (ans >= MOD) ans -= MOD;
         return ans;
     }
-    ModBase operator- (ModBase o) {
+    modBase operator- (modBase o) {
         int ans = val + MOD - o.val;
         if (ans >= MOD) ans -= MOD;
         return ans;
     }
-    ModBase operator* (ModBase o) {
+    modBase operator* (modBase o) {
         return (ll) val * o.val % MOD;
     }
-    ModBase operator/ (ModBase o) {
+    modBase operator/ (modBase o) {
         return *this * fExp(o, MOD - 2);
     }
 };
