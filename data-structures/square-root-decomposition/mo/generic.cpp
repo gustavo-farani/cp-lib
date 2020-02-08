@@ -11,7 +11,7 @@ struct Query {
     int l, r;    // closed interval: [l, r], 1-based indexation
     int id;      // priority number (entry time) of a query
     bool operator< (const Query &o) {
-        int i = l/bs, j = o.l/bs;
+        int i = (l - 1)/bs, j = (o.l - 1)/bs;
         if (i != j) {
             return (i < j);
         } else if (i & 1) {    // zig-zag optmization
@@ -38,7 +38,7 @@ struct Mo {
     void push (int l, int r) {  // pushes a new query to the back of the queue
         qrs.pb(Query{l, r, cnt++});
     }
-    queue<Answer> operator() () {
+    queue<Answer> solve () {
         vector<Answer> ans(qrs.size());
         sort(qrs.begin(), qrs.end());
         int l = 1, r = 0;             // following 1-based indexation
