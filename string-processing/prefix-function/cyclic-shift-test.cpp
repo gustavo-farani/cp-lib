@@ -15,19 +15,3 @@ bool isCyclicShift (const S& s, const S& t) {
     }
     return match;
 }
-
-#include <iostream>
-
-int main () {
-    int n;
-    cin >> n;
-    vi u(n);
-    for (int i = 0; i < n; i++) cin >> u[i];
-    vi v(n);
-    for (int i = 0; i < n; i++) cin >> v[i];
-    if (isCyclicShift(u, v)) {
-        cout << "Yes\n";
-    } else {
-        cout << "No\n";
-    }
-}
