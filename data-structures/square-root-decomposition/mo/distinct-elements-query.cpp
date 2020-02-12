@@ -4,13 +4,15 @@
 using namespace std;
     
 #define pb push_back
+typedef vector<int> vi;
 
-const int bs = 320;     // sqrt(1e5)
-    
+const int BS = 320;
+
 struct Query {
-    int l, r, id;
+    int l, r;
+    int id;
     bool operator< (const Query &o) {
-        int i = (l - 1)/bs, j = (o.l - 1)/bs;
+        int i = (l - 1)/BS, j = (o.l - 1)/BS;
         if (i != j) {
             return (i < j);
         } else if (i & 1) {
@@ -21,41 +23,39 @@ struct Query {
     }
 };
 
-typedef int Answer;
-
-int freq[300000 + 1], arr[300000 + 1];
-
-struct DS {
-    Answer state;    // := number of distinct elements in range
-    DS () : state(0) {}
-    void operator+= (int i) {
-        if (freq[arr[i]]++ == 0) state++;
-    }
-    void operator-= (int i) {
-        if (--freq[arr[i]] == 0) state--;
-    }
-} ds;
-
-struct Mo {
+struct DistinctElements {
+    vi v;
     int cnt;
     vector<Query> qrs;
-    Mo () : cnt(0) {}
-    void push (int l, int r) {   // [l, r] closed interval 1-based indexation
+    int state;
+    vi freq;
+    DistinctElements (int n) :
+        v(n + 1), cnt(0), state(0),
+        freq(1e6 + 1, 0)
+    {}
+    int& operator[] (int i) { return v[i]; }
+    void push (int l, int r) {
         qrs.pb(Query{l, r, cnt++});
-    }   // NOTE: empty interval such as (i, i - 1) is safely accepted
-    queue<Answer> operator() () {
-        vector<Answer> ans(qrs.size());
+    }
+    void add (int i) {
+        if (freq[v[i]]++ == 0) state++;
+    }
+    void remove (int i) {
+        if (--freq[v[i]] == 0) state--;
+    }
+    queue<int> solve () {
+        vi ans(qrs.size());
         sort(qrs.begin(), qrs.end());
         int l = 1, r = 0;
         for (Query q : qrs) {
-            while (l > q.l) ds += --l;
-            while (r < q.r) ds += ++r;
-            while (l < q.l) ds -= l++;
-            while (r > q.r) ds -= r--;
-            ans[q.id] = ds.state;
+            while (l > q.l) add(--l);
+            while (r < q.r) add(++r);
+            while (l < q.l) remove(l++);
+            while (r > q.r) remove(r--);
+            ans[q.id] = state;
         }
-        queue<Answer> q;
-        for (Answer a : ans) q.push(a);
+        queue<int> q;
+        for (int a : ans) q.push(a);
         return q;
     }
-} mo;
+};
