@@ -6,10 +6,10 @@ using namespace std;
 #define pb push_back
 typedef vector<int> vi;
 
-const int BS = 320;      // bucket-size
+const int BS = 320;      // bucket-size  (320 == sqrt(1e5))
 
 struct Query {
-    int l, r;    // closed interval: [l, r], 1-based indexation
+    int l, r;    // closed interval: [l, r]; 1-based indexation;
     int id;      // priority number (entry time) of a query
     bool operator< (const Query &o) {
         int i = (l - 1)/BS, j = (o.l - 1)/BS;
@@ -23,12 +23,9 @@ struct Query {
     }
 };
 
-struct Answer{}; // contains all the necessary data to be computed about a range
-// since a single integer value is usually enough, the struct definition may be
-// simply replaced by a:    typedef int Answer;     or     typedef long long Answer;
-
+template<class Answer>
 struct Mo {
-    vi v;                    // underlying array
+    vi v;                    // underlying array (we assume its value_type as int)
     int cnt;                 // queries id's are counted automatically and setted safely
     vector<Query> qrs;
     Answer state;            // the final answer after the range boundaries are adjusted
