@@ -12,13 +12,13 @@ vector<bool> patternMatching (const S& s, const S& t) {
     vi pi(prefixFunction(s));
     int prev = 0;
     for (int i = 0; i < m; i++) {
-        int j = prev;
+        int j = (prev == n ? pi[n - 1] : prev);
         while (j > 0 && t[i] != s[j]) {
             j = pi[j - 1];
         }
         int cur = (t[i] == s[j] ? j + 1 : 0);
         pos[i] = (cur == n);
-        prev = (cur == n ? pi[n - 1] : cur);
+        prev = cur;
     }
     /*
     Default: match at ending positions
@@ -33,4 +33,20 @@ vector<bool> patternMatching (const S& s, const S& t) {
     }
     */
     return pos;
+}
+
+template<class S>
+vi longestPrefixMatching (const S& s, const S& t) {
+    int n = s.size(), m = t.size();
+    vi pi(prefixFunction(s)), len(m);
+    int prev = 0;
+    for (int i = 0; i < m; i++) {
+        int j = (prev == n ? pi[n - 1] : prev);
+        while (j > 0 && t[i] != s[j]) {
+            j = pi[j - 1];
+        }
+        int cur = (t[i] == s[j] ? j + 1 : 0);
+        prev = len[i] = cur;
+    }
+    return len;   // len[i] = length of the longest prefix of s ending at t[i]
 }
