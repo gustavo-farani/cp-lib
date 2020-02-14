@@ -1,19 +1,17 @@
 #include <vector>
 using namespace std;
 
-typedef long long ll;
-
-struct Node {
-    Node operator+ (const Node &o);
-    void assign (ll x, int l, int r) {}
-} NIL;
-
 struct Todo {
     bool empty () {}
-    void pop () {}
-    void push (ll x) {}
-    ll top () {}
+    void clear () {}
+    void operator>> (const Todo& o) {}
+    void operator<< (const Todo& o) {}
 };
+
+struct Node {
+    Node operator+ (const Node &o) {}
+    void assign (const Todo &t, int l, int r) {}
+} NIL;
 
 template<class T>
 struct LazyPropagation {
@@ -23,14 +21,14 @@ struct LazyPropagation {
         tree(n << 2, NIL), lazy(n << 2)
     {}
     void refresh (int i, int l, int r) {
-        while (!lazy[i].empty()) {
-            tree[i].assign(lazy[i].top(), l, r);
+        if (!lazy[i].empty()) {
+            tree[i].assign(lazy[i], l, r);
             if (l < r) {
                 int lc = i << 1, rc = (i << 1) + 1;
-                lazy[lc].push(lazy[i].top());
-                lazy[rc].push(lazy[i].top());
+                lazy[i] << lazy[lc];
+                lazy[i] >> lazy[rc];
             }
-            lazy[i].pop();
+            lazy[i].clear();
         }
     }
     void update (int i, int l, int r, int ul, int ur, T x) {
