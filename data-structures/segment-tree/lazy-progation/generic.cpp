@@ -19,7 +19,7 @@ struct LazyPropagation {
     {}
     void refresh (int i, int l, int r) {
         if (!lazy[i].empty()) {
-            // TODO update this node
+            // TODO tackle the update on this node
             if (l < r) {
                 int m = (l + r) >> 1;
                 int lc = i << 1, rc = (i << 1) + 1;
@@ -34,7 +34,7 @@ struct LazyPropagation {
         if (r < ul || l > ur) {
             return;
         } else if (ul <= l && r <= ur) {
-            lazy[i].push(x);
+            // submit the update to Node i
             refresh(i, l, r);
         } else {
             int m = (l + r) >> 1;
