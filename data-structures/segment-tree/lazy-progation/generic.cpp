@@ -4,13 +4,10 @@ using namespace std;
 struct Todo {
     bool empty () {}
     void clear () {}
-    void operator>> (const Todo& o) {}
-    void operator<< (const Todo& o) {}
 };
 
 struct Node {
     Node operator+ (const Node &o) {}
-    void assign (const Todo &t, int l, int r) {}
 } NIL;
 
 template<class T>
@@ -22,11 +19,12 @@ struct LazyPropagation {
     {}
     void refresh (int i, int l, int r) {
         if (!lazy[i].empty()) {
-            tree[i].assign(lazy[i], l, r);
+            // TODO update this node
             if (l < r) {
+                int m = (l + r) >> 1;
                 int lc = i << 1, rc = (i << 1) + 1;
-                lazy[i] << lazy[lc];
-                lazy[i] >> lazy[rc];
+                // TODO propagate the lazy update to the left child
+                // TODO propagate the lazy update to the right child
             }
             lazy[i].clear();
         }
