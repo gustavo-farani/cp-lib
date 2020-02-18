@@ -5,10 +5,10 @@ using namespace std;
 #define pb push_back
 typedef vector<int> vi;
 
-struct Tree {
+struct EulerTour {
     vector<vi> adj, st;
     vi pre, lvl, euler, lg;
-    Tree (int n) :
+    EulerTour (int n) :
         adj(n + 1), pre(n + 1), lvl(n + 1), // 1-based
         st((n << 1) - 1), lg(n << 1)  // sparse table: 0-based
     {}
