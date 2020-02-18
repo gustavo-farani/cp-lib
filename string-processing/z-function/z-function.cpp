@@ -19,15 +19,3 @@ vi zFunction (const S& s) {
     }
     return z;
 }
-
-#include <bits/stdc++.h>
-
-int main () {
-    string s;
-    cin >> s;
-    vi z(zFunction(s));
-    for (int i = 0; i < s.size(); i++) {
-        cout << z[i] << ' ';
-    }
-    cout << '\n';
-}
