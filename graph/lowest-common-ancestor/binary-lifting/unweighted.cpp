@@ -4,10 +4,10 @@ using namespace std;
 #define pb push_back
 typedef vector<int> vi;
     
-struct Tree {
+struct BinaryLifting {
     vector<vi> adj, up;
     vi lvl;
-    Tree (int n) :
+    BinaryLifting (int n) :
         adj(n + 1), up(n + 1), 
         lvl(n + 1)
     {}
@@ -19,11 +19,9 @@ struct Tree {
         for (int v : adj[u]) {
             if (v != par) {
                 lvl[v] = 1 + lvl[u];
-                int w = u;
-                up[v].pb(w);
-                for (int i = 0; i < up[w].size(); i++) {
-                    w = up[w][i];
-                    up[v].pb(w);
+                up[v].pb(u);
+                for (int i = 0, a = u; i < up[a].size(); a = up[a][i++]) {
+                    up[v].pb(up[a][i]);
                 }
                 dfs(v, u);
             }
