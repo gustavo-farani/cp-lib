@@ -1,4 +1,5 @@
-#include "knuth-morris-pratt.cpp"
+#include "matching-as-ending-position.cpp"
+#include <algorithm>
 #include <vector>
 #include <string>
 using namespace std;

@@ -1,4 +1,4 @@
-#include "knuth-morris-pratt.cpp"
+#include "matching-as-ending-position.cpp"
 using namespace std;
 
 template<class S>
