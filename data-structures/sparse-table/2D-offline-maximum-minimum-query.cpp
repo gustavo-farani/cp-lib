@@ -55,12 +55,12 @@ struct SparseTable2D {
             }
         }
     }
-    T query (int i1, int j1, int i2, int j2) {  // 0-based indexation, closed intervals
-        int x = lg[i2 - i1 + 1];
-        int y = lg[j2 - j1 + 1];
-        return merge(merge(st[i1][j1][x][y],
-        st[i1][j2 - (1 << y) + 1][x][y]),
-        merge(st[i2 - (1 << x) + 1][j1][x][y],
-        st[i2 - (1 << x) + 1][j2 - (1 << y) + 1][x][y]));
+    T query (int r1, int c1, int r2, int c2) {  // 0-based indexation, closed intervals
+        int x = lg[r2 - r1 + 1];
+        int y = lg[c2 - c1 + 1];
+        return merge(merge(st[r1][c1][x][y],
+        st[r1][c2 - (1 << y) + 1][x][y]),
+        merge(st[r2 - (1 << x) + 1][c1][x][y],
+        st[r2 - (1 << x) + 1][c2 - (1 << y) + 1][x][y]));
     }
 };
