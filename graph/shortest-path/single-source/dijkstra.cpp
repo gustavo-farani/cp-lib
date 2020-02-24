@@ -1,6 +1,7 @@
 #include <vector>
 #include <queue>
 #include <tuple>
+#include <algorithm>
 using namespace std;
 
 #define pb push_back
@@ -18,9 +19,8 @@ struct Graph {     // Dijkstra's Algorithm
         adj[u].pb({w, v});    // undirected graph
         adj[v].pb({w, u});
     }
-    vector<ll> shortestPaths (int src) {
+    vector<ll> minimumDistances (int src) {
         vector<ll> dist(n, INF);
-        // vi from(n);          (predecessors)
         priority_queue< Edge, vector<Edge>, greater<Edge> > margin;
         margin.emplace(dist[src] = 0, src);
         while (!margin.empty()) {
@@ -33,12 +33,34 @@ struct Graph {     // Dijkstra's Algorithm
                     int v, w;
                     tie (w, v) = e;
                     if (l + w < dist[v]) {
-                        // from[v] = u;    (predecessors)
                         margin.emplace(dist[v] = l + w, v);
                     }
                 }
             }
         }
         return dist;
+    }
+    vi shortestPaths (int src) {
+        vector<ll> dist(n, INF);
+        vi from(n);
+        priority_queue< Edge, vector<Edge>, greater<Edge> > margin;
+        margin.emplace(dist[src] = 0, src);
+        while (!margin.empty()) {
+            int u;
+            ll l;
+            tie (l, u) = margin.top();
+            margin.pop();
+            if (l <= dist[u]) {
+                for (Edge e : adj[u]) {
+                    int v, w;
+                    tie (w, v) = e;
+                    if (l + w < dist[v]) {
+                        from[v] = u;
+                        margin.emplace(dist[v] = l + w, v);
+                    }
+                }
+            }
+        }
+        return from;
     }
 };
