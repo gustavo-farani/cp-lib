@@ -16,43 +16,40 @@ const int INF = 0x3f3f3f3f;
 vector<ii> windrose({{1, 0}, {0, 1}, {-1, 0}, {0, -1}});
 
 struct Grid {
-    int n, m;
     vector< vector<bool> > pass;  // if passable
     vector<vi> dist;
     Grid (int n, int m) :
-        n(n),
-        m(m),
         pass(n + 2, vector<bool>(m + 2, false)),
         dist(n + 2, vi(m + 2, INF))
     {}
-    void bfs (const ii &src) {   // Single-source
+    void minimumDistances (const ii &s) {   // Single-Source Breadth-First-Search
         queue<ii> q;
-        dist[src.x][src.y] = 0;
-        q.push(src);
+        dist[s.x][s.y] = 0;
+        q.push(s);
         while (!q.empty()) {
-            ii &v = q.front();
+            ii &u = q.front();
             for (ii &d : windrose) {
-                ii u(v.x + d.x, v.y + d.y);
-                if (pass[u.x][u.y] && dist[u.x][u.y] == -1) {
-                    dist[u.x][u.y] = 1 + dist[v.x][v.y];
-                    q.push(u);
+                ii v(u.x + d.x, u.y + d.y);
+                if (pass[v.x][v.y] && dist[v.x][v.y] == INF) {
+                    dist[v.x][v.y] = 1 + dist[u.x][u.y];
+                    q.push(v);
                 }
             }
             q.pop();
         }
     }
-    void bfs (const vector<ii> &s) {  // Multi-source
+    void minimumDistances (const vector<ii> &s) {  // Multi-Source Breadth-First-Search
         queue<ii> q;
-        for (ii src : s) {
-            dist[src.x][src.y] = 0;
-            q.push(src);
+        for (ii u : s) {
+            dist[u.x][u.y] = 0;
+            q.push(u);
         }
         while (!q.empty()) {
-            ii &v = q.front();
+            ii &u = q.front();
             for (ii &d : windrose) {
-                ii u(v.x + d.x, v.y + d.y);
-                if (pass[u.x][u.y] && dist[u.x][u.y] == INF) {
-                    dist[u.x][u.y] = 1 + dist[v.x][v.y];
+                ii v(u.x + d.x, u.y + d.y);
+                if (pass[v.x][v.y] && dist[v.x][v.y] == INF) {
+                    dist[v.x][v.y] = 1 + dist[u.x][u.y];
                     q.push(u);
                 }
             }
