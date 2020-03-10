@@ -1,3 +1,4 @@
+#include <cmath>
 typedef double ld;
 
 struct PT {
@@ -19,5 +20,8 @@ struct PT {
     }
     ld operator^ (PT o) {
         return x*o.y - y*o.x;
+    }
+    ld operator! () {
+        return sqrt(*this * *this);
     }
 };
