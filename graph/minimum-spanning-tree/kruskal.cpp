@@ -1,35 +1,25 @@
 #include <tuple>
 #include <vector>
 #include <algorithm>
-#include "../../data-structures/disjoint-sets-union.cpp"
+#include "../../data-structures/disjoint-sets-union/connection-test.cpp"
+#include "../default/graph.cpp"
 using namespace std;
 
 #define pb push_back
-typedef pair< int, pair<int, int> > iii;
 
-struct Graph {      // possibly not connected graph
-    int n;
-    vector<iii> edges;    // weighted edge list
-    Graph (int n) : n(n) {}
-    void addEdge (int u, int v, int w) {
-        edges.pb({w, {u, v}});  // undirected
-    }
-    vector<iii> minimumSpanningTree () { // Kruskal's Algorithm
-        vector<iii> mst;
-        DSU forest(n);
-        sort(edges.begin(), edges.end());
-        for (iii &e : edges) {
-            int u, v;
-            tie (u, v) = e.second;
-            if (!forest.tied(u, v)) {
-                mst.pb(e);
-                forest.merge(u, v);
-            }
-        }
-        if (mst.size() == n - 1) {
-            return mst;
-        } else {
-            throw -1;    // not a connected graph
+// edges: possibly not a connected graph in edge list representation
+vector<WE> minimumSpanningTree (const vector<WE>& edges) {
+    int n = edges.size();
+    vector<WE> mst;
+    DSU dsu(n);
+    sort(edges.begin(), edges.end(),
+    [] (const WE& a, const WE& b) { return a.weigth < b.weigth; });
+    for (const WE& e : edges) {
+        if (!dsu.connected(e.from, e.to)) {
+            mst.pb(e);
+            dsu.merge(e.from, e.to);
         }
     }
-};
+    if (mst.size() == n - 1) return mst;
+    else throw -1;             // detects a non-connected graph
+}
