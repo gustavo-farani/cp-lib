@@ -1,13 +1,16 @@
 #include <vector>
+#include <functional>
 using namespace std;
 
 typedef vector<int> vi;
 
 template<class T>
 struct SparseTable2D {
-    vector< vector< vector< vector<T> > > > st;
+    function<T(T, T)> merge;
+    vector<vector<vector<vector<T>>>> st;
     vi lg;
-    SparseTable2D (int n, int m) :
+    SparseTable2D (int n, int m, function<T(T, T)> merge) :
+        merge(merge),
         st(n, vector< vector< vector<T> > >(m)),
         lg(1 + max(n, m))
     {
@@ -24,7 +27,6 @@ struct SparseTable2D {
     T& at (int i, int j) {   // 0-based indexation
         return st[i][j][0][0];
     }
-    T merge (int x, int y);  // TODO get maximum or minimum
     void build (int n, int m) {
         for (int i = 0; i < n; i++) {
             for (int y = 1; y <= lg[m]; y++) {
