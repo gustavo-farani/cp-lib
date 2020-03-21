@@ -1,13 +1,17 @@
 #include <cmath>
+
 typedef double ld;
 
 struct PT {
     ld x, y;
-    PT operator+ (PT o) {
+    PT operator+ (const PT& o) const {
         return PT{x + o.x, y + o.y};
     }
-    PT operator- (PT o) {
+    PT operator- (const PT& o) const {
         return PT{x - o.x, y - o.y};
+    }
+    PT operator- () {
+        return PT{-x, -y};
     }
     PT operator/ (ld t) {
         return PT{x/t, y/t};
@@ -15,10 +19,10 @@ struct PT {
     PT operator* (ld t) {
         return PT{x*t, y*t};
     }
-    ld operator* (PT o) {
+    ld operator* (const PT& o) const {
         return x*o.x + y*o.y;
     }
-    ld operator^ (PT o) {
+    ld operator^ (const PT& o) const {
         return x*o.y - y*o.x;
     }
     ld operator! () {
