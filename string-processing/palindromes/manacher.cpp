@@ -6,9 +6,9 @@ typedef vector<int> vi;
 
 template<class S>
 array<vi, 2> manacher (const S& s) {
-	int n = s.size();
-	array<vi, 2> d({vi(n), vi(n)});
-	for (int z = 0; z < 2; z++) {
+    int n = s.size();
+    array<vi, 2> d({vi(n), vi(n)});
+    for (int z = 0; z < 2; z++) {
         int gl = 0, gr = 0;
         for (int i = 0; i < n; i++) {
             d[z][i] = i > gr ? z : min(gr - i + 1, d[z][gl + gr - i + !z]);
@@ -23,6 +23,6 @@ array<vi, 2> manacher (const S& s) {
                 gr = tr;
             }
         }
-	}
-	return d;
+    }
+    return d;
 }
