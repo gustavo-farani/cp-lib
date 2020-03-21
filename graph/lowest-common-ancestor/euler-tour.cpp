@@ -1,59 +1,40 @@
-#include <algorithm>
 #include <vector>
+#include "../../data-structures/sparse-table/offline-subarray-minimum-query.cpp"
 using namespace std;
 
 #define pb push_back
 typedef vector<int> vi;
 
 struct EulerTour {
-    vector<vi> adj, st;
-    vi pre, lvl, euler, lg;
+    vector<vi> adj;
+    vi pre, lvl;
+    int cnt;
+    SparseTable<int> st;
     EulerTour (int n) :
         adj(n + 1), pre(n + 1), lvl(n + 1), // 1-based
-        st((n << 1) - 1), lg(n << 1)  // sparse table: 0-based
+        cnt(0), st((n << 1) - 1, [&] (int u, int v) { return lvl[u] <= lvl[v] ? u : v; })
     {}
     void addEdge (int u, int v) {
         adj[u].pb(v);
         adj[v].pb(u);
     }
     void dfs (int u, int par) {
-        pre[u] = euler.size();
-        euler.pb(u);
+        st.at(pre[u] = cnt++) = u;
         for (int v : adj[u]) {
             if (v != par) {
                 lvl[v] = lvl[u] + 1;
                 dfs(v, u);
-                euler.pb(u);
+                st.at(cnt++) = u;
             }
         }
     }
-    int merge (int u, int v) {
-        return (lvl[u] <= lvl[v] ? u : v);
-    }
-    void build (int r) {
+    void build (int r) { 
         dfs(r, r);
-        int m = euler.size();  // 2*(n - 1) + 1
-        for (int i = 2; i <= m; i++) {
-            lg[i] = lg[i >> 1] + 1;
-        }
-        for (int i = 0; i < m; i++) {
-            st[i].assign(lg[m - i] + 1, -1);
-            st[i][0] = euler[i];
-        }
-        for (int j = 1; j <= lg[m]; j++) {
-            for (int i = 0; i + (1 << j) <= m; i++) {
-                st[i][j] = merge(st[i][j - 1],
-                st[i + (1 << (j - 1))][j - 1]);
-            }
-        }
-    }
-    int query (int l, int r) {
-        int k = lg[r - l + 1];
-        return merge(st[l][k], st[r - (1 << k) + 1][k]);
+        st.build(cnt);
     }
     int lca (int u, int v) {
         if (pre[u] > pre[v]) swap(u, v);
-        return query(pre[u], pre[v]);
+        return st.query(pre[u], pre[v]);
     }
     int dist (int u, int v) {
         int w = lca(u, v);
