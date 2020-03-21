@@ -6,17 +6,14 @@ typedef vector<int> vi;
 
 template<class T>
 struct SparseTable2D {
-    function<T(T, T)> merge;
     vector<vector<vector<vector<T>>>> st;
     vi lg;
+    function<T(T, T)> merge;
     SparseTable2D (int n, int m, function<T(T, T)> merge) :
-        merge(merge),
-        st(n, vector< vector< vector<T> > >(m)),
-        lg(1 + max(n, m))
+        st(n, vector<vector<vector<T>>>(m)),
+        lg(1 + max(n, m)), merge(merge)
     {
-        for (int i = 2; i < lg.size(); i++) {
-            lg[i] = 1 + lg[i >> 1];
-        }
+        for (int i = 2; i < lg.size(); i++) lg[i] = 1 + lg[i >> 1];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 st[i][j].assign(1 + lg[n - i],
