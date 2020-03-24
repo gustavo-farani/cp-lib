@@ -1,6 +1,6 @@
 #include "point.cpp"
 
-ld area (PT a, PT b, PT c) {
+ld area (const PT& a, const PT& b, const PT& c) {
     PT u = b - a, v = c - a;
-    return abs(u ^ v)/2L;
+    return abs(u ^ v)/2.0;
 }
