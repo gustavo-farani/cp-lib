@@ -1,30 +1,31 @@
 #include <vector>
-using namespace std;
+#include "../number-theory/modular-arithmetic/mod-base.cpp"
 
-typedef long long ll;
-typedef vector<int> vi;
-
-const int MOD = 1e9 + 7;
+const int ORDER = 3;
 
 struct Matrix {
-	int o;     // order (number of rows and columns) of the square matrix
-	vector<vi> e;
-	Matrix (int o, int k) : o(o), e(o, vi(o)) {
-		for (int i = 0; i < o; i++) for (int j = 0; j < o; j++)
-			e[i][j] = k*(i == j);    // initialized as kI := identity matrix scaled by k
-	}
-	Matrix operator* (const Matrix& a) {   // matrix-matrix multiplication
-		Matrix p(o, 0);
-		for (int i = 0; i < o; i++) for (int j = 0; j < o; j++)
-			for (int k = 0; k < o; k++)
-				p.e[i][j] = (p.e[i][j] + (ll) e[i][k]*a.e[k][j]) % MOD;
-		return p;
-	}
-	vi operator* (const vi &v) {           // vector-matrix multiplication
-		vi u(o);
-		for (int i = 0; i < o; i++)
-			for (int k = u[i] = 0; k < o; k++)
-				u[i] = (u[i] + (ll) e[i][k]*v[k]) % MOD;
-		return u;
-	}
+    int n;     // order (number of rows and columns) of the square matrix
+    vector<vector<MB>> e;
+    Matrix (int k, int n = ORDER) : n(n), e(n, vector<MB>(n)) {
+        for (int i = 0; i < n; i++) e[i][i] = k;
+    }   // initialized as kI := identity matrix scaled by k
+    Matrix operator* (const Matrix& a) {   // matrix-matrix multiplication
+        Matrix p(0, n);
+        for (int i = 0; i < n; i++) for (int j = 0; j < n; j++)
+            for (int k = 0; k < n; k++) p.e[i][j] = p.e[i][j] + e[i][k]*a.e[k][j];
+        return p;
+    }
+    vector<MB> operator* (const vector<MB>& v) {  // vector-matrix multiplication
+        vector<MB> u(n);
+        for (int i = 0; i < n; i++) for (int k = 0; k < n; k++)
+            u[i] = u[i] + e[i][k]*v[k];
+        return u;
+    }
+    MB& operator() (int i, int j) { return e[i][j]; }
 };
+
+/* How to initialize a matrix:
+    Matrix m(0, 2);
+    m.e[0] = {2, -1};
+    m.e[1] = {1, 1};
+*/
