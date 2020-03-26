@@ -10,8 +10,7 @@ typedef long long ll;
 struct Rise {
     int anc;
     ll local;
-    Rise () : anc(0), local(0) {}
-    Rise (int u) : anc(u), local(0) {}
+    Rise (int u = 0) : anc(u), local(0) {}
     Rise operator+ (Rise o) {
         Rise ans;
         ans.anc = o.anc;
