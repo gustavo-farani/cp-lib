@@ -2,7 +2,7 @@
 #include "../vector/point.cpp"
 using namespace std;
 
-struct Line {  // TO BE TESTED
+struct Line {
     PT p, d;  // position and direction vectors
     Line (const PT& a, const PT& b) : p(a), d(b - a) {}
     bool contains (const PT& q) const {

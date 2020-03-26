@@ -1,6 +1,7 @@
 #include <tuple>
 #include "../vector/point.cpp"
 #include "../line/vector-form.cpp"
+#include "../vector/orientation.cpp"
 using namespace std;
 
 struct LineSegment {  // TO BE TESTED

@@ -43,7 +43,3 @@ struct PT {
         return eq(x, o.x) && eq(y, o.y);
     }
 };
-
-bool collinear (const PT& a, const PT& b, const PT& c) {
-    return eq0(b - a ^ c - a);
-}
