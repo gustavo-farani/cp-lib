@@ -1,3 +1,4 @@
+#include <cmath>
 #include "point.cpp"
 
 ld area (const PT& a, const PT& b, const PT& c) {

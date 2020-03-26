@@ -1,7 +1,5 @@
 #include <cmath>
-#include "../floating-point/point.cpp"
-
-typedef double ld;
+#include "../point.cpp"
 
 const ld PI = acos(-1.0);
 

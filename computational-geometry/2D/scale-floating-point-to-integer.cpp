@@ -7,7 +7,7 @@ typedef long long ll;
 number to be converted. It can either have a decimal point or not. */
 /* p: (precision) maximum number of decimal positions after the decimal
 point in r */
-ll scale (const string& r, int p) {
+ll scale (const string& r, int p) {  // credits to josecruz
     ll ans = 0LL;
     int i = 0;
     while (i < r.size() && r[i] != '.') {

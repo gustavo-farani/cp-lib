@@ -15,7 +15,6 @@ struct Rect {
         return Rect{inter(x, o.x), inter(y, o.y)};
     }
     bool empty () {
-        return (x.first > x.second
-        || y.first > y.second);
+        return (x.first > x.second || y.first > y.second);
     }
 };

@@ -9,4 +9,4 @@ bool operator< (const PT& a, const PT& b) {   // TO BE TESTED
         ll c = a ^ b;
         return (c > 0 || c == 0 && a*b < 0);
     }
-}       // counter-clock-wise sorting based on polar angle
+}  // counter-clock-wise sorting vectors based on their polar angle
