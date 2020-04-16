@@ -1,7 +1,7 @@
 typedef long long ll;
 
 template <class T>
-T fExp (T a, ll n) {
+T fastExp (T a, ll n) {
     T ans(1);
     while (n) {
         if (n & 1) ans = ans * a;
