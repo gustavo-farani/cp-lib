@@ -12,13 +12,13 @@ struct Matrix {
     Matrix operator* (const Matrix& a) {   // matrix-matrix multiplication
         Matrix p(0, n);
         for (int i = 0; i < n; i++) for (int j = 0; j < n; j++)
-            for (int k = 0; k < n; k++) p.e[i][j] = p.e[i][j] + e[i][k]*a.e[k][j];
+            for (int k = 0; k < n; k++) p.e[i][j] += e[i][k]*a.e[k][j];
         return p;
     }
     vector<MB> operator* (const vector<MB>& v) {  // vector-matrix multiplication
         vector<MB> u(n);
         for (int i = 0; i < n; i++) for (int k = 0; k < n; k++)
-            u[i] = u[i] + e[i][k]*v[k];
+            u[i] += e[i][k]*v[k];
         return u;
     }
     MB& operator() (int i, int j) { return e[i][j]; }
