@@ -12,12 +12,11 @@ const ll INF = 1e18;
 
 struct FlowNetwork {
     vector<vi> adj;
-    vector< vector<ll> > res/*, flow*/;
+    vector<vector<ll>> res, flow;
     vi pred;
     vector<ll> neck;
     FlowNetwork (int n) :   // 0-based
-        res(n, vector<ll>(n)),
-        // flow(n, vector<ll>(n)),
+        res(n, vector<ll>(n)), flow(res),
         adj(n), pred(n), neck(n)
     {}
     // calling addEdge(u, v, w) and addEdge(v, u, w) for undirected edge
@@ -56,8 +55,8 @@ struct FlowNetwork {
             ll c = neck[t];
             for (int v = t; v != s; v = pred[v]) {
                 int u = pred[v];
-                // flow[u][v] += c;
-                // flow[v][u] -= c;
+                flow[u][v] += c;
+                flow[v][u] -= c;
                 res[u][v] -= c;
                 res[v][u] += c;
             }
@@ -68,11 +67,8 @@ struct FlowNetwork {
     ll minimumCut (int s, vi &a, int t, vi &b, int n) {
         ll ans = maximumFlow(s, t);
         for (int i = 0; i < n; i++) {
-            if (pred[i] == -1) {
-                b.pb(i);
-            } else {
-                a.pb(i);
-            }
+            if (pred[i] == -1) b.pb(i);
+            else a.pb(i);
         }
         return ans;   // capacity of the minimum cut
     }

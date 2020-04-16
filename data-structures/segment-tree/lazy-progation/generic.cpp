@@ -21,7 +21,7 @@ struct LazyPropagation {
         if (!lazy[i].empty()) {
             // TODO tackle the update on this node
             if (l < r) {
-                int m = (l + r) >> 1;
+                int m = l + r >> 1;
                 int lc = i << 1, rc = (i << 1) + 1;
                 // TODO propagate the lazy update to the left child
                 // TODO propagate the lazy update to the right child
@@ -37,7 +37,7 @@ struct LazyPropagation {
             // submit the update to Node i
             refresh(i, l, r);
         } else {
-            int m = (l + r) >> 1;
+            int m = l + r >> 1;
             int lc = i << 1, rc = (i << 1) + 1;
             update(lc, l, m, ul, ur, x);
             update(rc, m + 1, r, ul, ur, x);
@@ -51,7 +51,7 @@ struct LazyPropagation {
         } else if (ql <= l && r <= qr) {
             return tree[i];
         } else {
-            int m = (l + r) >> 1;
+            int m = l + r >> 1;
             int lc = i << 1, rc = (i << 1) + 1;
             return query(lc, l, m, ql, qr) + query(rc, m + 1, r, ql, qr);
         }

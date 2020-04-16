@@ -18,7 +18,7 @@ struct SegmentTree {
         } else if (l == r) {
             tree[i].leaf(x);
         } else {
-            int m = (l + r) >> 1;
+            int m = l + r >> 1;
             int lc = i << 1, rc = (i << 1) + 1;
             update(lc, l, m, p, x);
             update(rc, m + 1, r, p, x);
@@ -31,7 +31,7 @@ struct SegmentTree {
         } else if (ql <= l && r <= qr) {
             return tree[i];
         } else {
-            int m = (l + r) >> 1;
+            int m = l + r >> 1;
             int lc = i << 1, rc = (i << 1) + 1;
             return query(lc, l, m, ql, qr) + query(rc, m + 1, r, ql, qr);
         }

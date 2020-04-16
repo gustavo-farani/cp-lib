@@ -10,7 +10,7 @@ vector<T> mode (S first, S last, int n) {  // [first, last) SORTED range
 // only T should be passed as template argument (S is implicit)
 // n must be passed as the pre-computed distance beetween first and last
     int maxFreq = 0;
-    vector< vector<T> > table(n);
+    vector<vector<T>> table(n);
     S jt;
     for (S it = first; it != last; it = jt) {
         int len = -1;

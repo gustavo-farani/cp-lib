@@ -16,7 +16,7 @@ const int INF = 0x3f3f3f3f;
 vector<ii> windrose({{1, 0}, {0, 1}, {-1, 0}, {0, -1}});
 
 struct Grid {
-    vector< vector<bool> > pass;  // if passable
+    vector<vector<bool>> pass;  // if passable
     vector<vi> dist;
     Grid (int n, int m) :
         pass(n + 2, vector<bool>(m + 2, false)),

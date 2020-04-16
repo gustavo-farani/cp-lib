@@ -9,9 +9,7 @@ struct LIS {
     vector<T> pivot;
     vi pred, pos, color;
     template <class I, class C>
-    LIS (I first, I last, C comp) :
-        pred(last - first), color(last - first)
-    {
+    LIS (I first, I last, C comp) : pred(last - first), color(last - first) {
         for (I it = first; it != last; it++) {
             int i = it - first;
             int j = lower_bound(pivot.begin(), pivot.end(), *it, comp) - pivot.begin();
@@ -35,9 +33,7 @@ struct LIS {
     */
     vi restore () {
         vector<T> lis;
-        for (int i = pos.back(); i != -1; i = pred[i]) {
-            lis.pb(i);
-        }
+        for (int i = pos.back(); i != -1; i = pred[i]) lis.pb(i);
         reverse(lis.begin(), lis.end());
         return lis;
     }

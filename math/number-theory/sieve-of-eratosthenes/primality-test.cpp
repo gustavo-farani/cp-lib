@@ -15,5 +15,5 @@ struct PrimalityTest {
             }
         }
     }
-    bool operator() (int x) {return sieve[x]; }
+    bool operator() (int x) { return sieve[x]; }
 } prime(1e6);

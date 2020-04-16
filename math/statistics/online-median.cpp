@@ -2,13 +2,15 @@
 #include <queue>
 using namespace std;
 
+template<typename T> using min_heap = priority_queue<T, vector<T>, greater<T>>;
+
 template <typename T>
 struct MedianHeap {
     priority_queue<T> left; // Max Heap
-    priority_queue< T, vector<T>, greater<T> > right; // Min Heap
+    min_heap<T> right; // Min Heap
     int size () { return left.size() + right.size(); }
     void push (T x) {
-        if (!size()) {  // empty
+        if (size() == 0) {  // empty
             left.push(x);
         } else if (size() & 1) {   // odd
             if (x < left.top()) {

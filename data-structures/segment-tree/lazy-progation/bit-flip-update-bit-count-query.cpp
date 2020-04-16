@@ -28,7 +28,7 @@ struct BitFlip {
             lazy[i] = !lazy[i];
             refresh(i, l, r);
         } else {
-            int m = (l + r) >> 1;
+            int m = l + r >> 1;
             int lc = i << 1, rc = (i << 1) + 1;
             update(lc, l, m, ul, ur);
             update(rc, m + 1, r, ul, ur);
@@ -42,7 +42,7 @@ struct BitFlip {
         } else if (ql <= l && r <= qr) {
             return tree[i];
         } else {
-            int m = (l + r) >> 1;
+            int m = l + r >> 1;
             int lc = i << 1, rc = (i << 1) + 1;
             return query(lc, l, m, ql, qr) + query(rc, m + 1, r, ql, qr);
         }
