@@ -14,7 +14,7 @@ vector<ii> windrose({{1, 0}, {0, 1}, {-1, 0}, {0, -1}});
  
 struct Grid {
     int n, m;
-    vector< vector<bool> > e;  // zero-one matrix representing the input grid
+    vector<vector<bool>> e;  // zero-one matrix representing the input grid
     // 1 - passable, 0 - impassable
     vector<vi> c;  // c[i][j]: color of cell at coordinates i and j, i.e.,
     // the numeric label identifying the connected component cell (i, j) is part of

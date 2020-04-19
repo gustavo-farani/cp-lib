@@ -1,47 +1,40 @@
-#include <vector>
-#include "../default/graph.cpp"
-#include "../../math/util/floor-lg.cpp"
-using namespace std;
-    
-#define pb push_back
-typedef vector<int> vi;
-typedef long long ll;
+#include "../representation/graph.cpp"
 
 struct Rise {
     int anc;
-    ll local;
-    Rise (int u = 0) : anc(u), local(0) {}
+    ll best;
+    Rise (int u = 0) : anc(u), best(0) {}
     Rise operator+ (Rise o) {
         Rise ans;
         ans.anc = o.anc;
-        ans.local = max(local, o.local); // !TODO merge paths
+        ans.best = max(best, o.best); // !TODO merge paths
         return ans;
     }
     void operator+= (Rise o) { *this = *this + o; }
 };
 
+const int MAX_LG = 20;  // !TODO adjust maximum lg(|V|) according to input size
+
 struct BinaryLifting {
-    int max_lg;
     vi lvl;
     vector<vector<Rise>> up;
-    template<class T> BinaryLifting (const Graph<T>& g, int r) :
-       max_lg(floorlg(g.n)), lvl(g.n + 1), up(max_lg + 1, vector<Rise>(g.n + 1))
-    {
+    BinaryLifting (const WeightedGraph& g) :
+       lvl(g.last), up(MAX_LG + 1, vector<Rise>(g.last))
+    {  // g: weighted tree in neighbour list representation
         function<void(int, int)> dfs = [&] (int u, int par) {
-            for (int z : g.adj[u]) {
-                int v = u ^ g.edges[z].from ^ g.edges[z].to;
+            for (auto [w, v] : g.adj[u]) {  // C++ 17
                 if (v != par) {
                     lvl[v] = 1 + lvl[u];
                     up[0][v].anc = u;
-                    up[0][v].local = g.edges[z].weigth; // !TODO start up with edge from v to u
-                    for (int i = 0, a = u; i + 1 <= max_lg; a = up[i++][a].anc) {
+                    up[0][v].best = w; // !TODO start up with edge from v to u
+                    for (int i = 0, a = u; i + 1 <= MAX_LG; a = up[i++][a].anc) {
                         up[i + 1][v] = up[i][v] + up[i][a];
                     }
                     dfs(v, u);
                 }
             }
         };
-        dfs(r, r);
+        dfs(g.first, g.first);
     }
     Rise lift (int u, int k) {
         Rise ans(u);
@@ -58,7 +51,7 @@ struct BinaryLifting {
         Rise ans = lift(u, lvl[u] - lvl[v]);
         u = ans.anc;
         if (u != v) {
-            for (int i = max_lg; i >= 0; i--) {
+            for (int i = MAX_LG; i >= 0; i--) {
                 if (up[i][u].anc != up[i][v].anc) {
                     ans += up[i][u];
                     u = ans.anc;
