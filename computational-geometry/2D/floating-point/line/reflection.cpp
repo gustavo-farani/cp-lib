@@ -1,6 +1,6 @@
-#include "../vector/point.cpp"
+#include "vector-form.cpp"
 #include "../vector/reflection.cpp"
 
-PT Line::reflect (const PT& q) const {  // TO BE TESTED
-    return p + reflect(q - p, d);
+PT reflect (const PT& q, const Line& l) {  // TO BE TESTED
+    return l.p + reflect(q - l.p, l.d);
 }

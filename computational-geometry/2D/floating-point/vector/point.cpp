@@ -1,6 +1,4 @@
-#include <cmath>
-
-typedef double ld;
+#include "../../../../template.cpp"
 
 const ld EPS = 1e-9;
 

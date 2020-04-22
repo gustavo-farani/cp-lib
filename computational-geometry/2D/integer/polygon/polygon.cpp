@@ -6,5 +6,5 @@ struct Polygon {
     Polygon (vector<PT>&& v) : sides(v.size()), p(v) {
         p.pb(p.front()); // facilitates iteration through edges
     }
-    PT operator[] (int i) const { return p[i]; }  // acess ith vertex
+    PT operator[] (int i) { return p[i]; }  // acess ith vertex
 };

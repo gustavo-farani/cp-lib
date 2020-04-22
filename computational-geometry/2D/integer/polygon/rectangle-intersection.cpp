@@ -1,8 +1,4 @@
-#include <tuple>
-#include <algorithm>
-using namespace std;
-
-typedef pair<int, int> ii;
+#include "../../../../template.cpp"
 
 ii inter (ii a, ii b) {
     if (b.first < a.first) swap(a, b);

@@ -1,6 +1,4 @@
-#include <tuple>
 #include "../vector/point.cpp"
-using namespace std;
 
 struct Line {
     PT p, d;  // position and direction vectors

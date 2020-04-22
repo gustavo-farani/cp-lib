@@ -1,4 +1,4 @@
-typedef long long ll;
+#include "../../../../template.cpp"
 
 struct PT {
     ll x, y;
@@ -24,11 +24,10 @@ struct PT {
     ll operator! () const {  // square of norm
         return *this**this;
     }
+    bool operator== (const PT& o) const {  // coincidence
+        return x == o.x && y == o.y;
+    }
     bool operator< (const PT& o) const {  // lexicographic order
         return x == o.x ? y < o.y : x < o.x;
     }
 };
-
-bool collinear (const PT& a, const PT& b, const PT& c) {
-    return (b - a ^ c - a) == 0;
-}

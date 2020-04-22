@@ -1,7 +1,4 @@
-#include <tuple>
-#include <numeric>
 #include "../vector/point.cpp"
-using namespace std;
 
 struct Line {
     ll a, b, c;
