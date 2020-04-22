@@ -1,10 +1,4 @@
 #include "matching-as-ending-position.cpp"
-#include <algorithm>
-#include <vector>
-#include <string>
-using namespace std;
-
-typedef vector<int> vi;
 
 string shortestPalindromicExtension (const string& t) {
     string s(t);

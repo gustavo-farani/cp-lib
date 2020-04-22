@@ -1,7 +1,5 @@
-#include <algorithm>
-using namespace std;
+#include "../../../template.cpp"
 
-typedef long long ll;
 const ll INF = 1e9;
 
 struct Node {

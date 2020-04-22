@@ -1,4 +1,4 @@
-typedef long long ll;
+#include "../../../template.cpp"
 
 int count (ll n) {
     int total = 0;

@@ -1,7 +1,4 @@
-#include <vector>
-using namespace std;
-
-typedef vector<int> vi;
+#include "../../template.cpp"
 
 struct Quantifier {
     bool b;   // b = 0 for 0-based, b = 1 for 1-based (indexation)

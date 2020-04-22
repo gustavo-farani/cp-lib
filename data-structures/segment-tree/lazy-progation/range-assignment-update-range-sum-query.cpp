@@ -1,6 +1,4 @@
-#include <vector>
-#include <tuple>
-using namespace std;
+#include "../../../template.cpp"
 
 typedef long long ll;
 

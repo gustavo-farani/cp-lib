@@ -1,9 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
-
-#define pb push_back
-typedef vector<int> vi;
-typedef long long ll;
+#include "../../../../template.cpp"
 
 struct Graph {  // unweighted graph
     int first, last, n;

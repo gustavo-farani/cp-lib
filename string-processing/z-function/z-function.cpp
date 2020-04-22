@@ -1,8 +1,4 @@
-#include <vector>
-#include <algorithm>
-using namespace std;
-
-typedef vector<int> vi;
+#include "../../template.cpp"
 
 template<class S>
 vi zFunction (const S& s) {

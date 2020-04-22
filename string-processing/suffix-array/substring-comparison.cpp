@@ -1,8 +1,4 @@
-#include <vector>
-#include <algorithm>
-using namespace std;
-
-typedef vector<int> vi;
+#include "../../template.cpp"
 
 struct SubstringComparison {
     vector<vi> bucket;

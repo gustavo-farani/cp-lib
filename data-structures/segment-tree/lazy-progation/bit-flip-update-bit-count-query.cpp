@@ -1,7 +1,4 @@
-#include <vector>
-using namespace std;
-
-typedef vector<int> vi;
+#include "../../../template.cpp"
  
 struct BitFlip {
     vi tree;

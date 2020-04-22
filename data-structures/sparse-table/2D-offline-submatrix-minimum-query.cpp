@@ -1,8 +1,4 @@
-#include <vector>
-#include <functional>
-using namespace std;
-
-typedef vector<int> vi;
+#include "../../template.cpp"
 
 template<class T>
 struct SparseTable2D {

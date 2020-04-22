@@ -1,8 +1,4 @@
-#include <vector>
-#include <queue>
-using namespace std;
-
-template<typename T> using min_heap = priority_queue<T, vector<T>, greater<T>>;
+#include "../../template.cpp"
 
 template <typename T>
 struct MedianHeap {

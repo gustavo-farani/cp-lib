@@ -1,5 +1,4 @@
-#include <vector>
-using namespace std;
+#include "../../template.cpp"
 
 template<class T>
 struct RangeSum {   // Binary Indexed Tree for Online Range Sum Query

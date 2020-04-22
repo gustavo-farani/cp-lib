@@ -1,15 +1,11 @@
-#include <vector>
 #include "manacher.cpp"
 #include "../../data-structures/sparse-table/offline-subarray-minimum-query.cpp"
 #include "../../problem-solving-paradigms/binary-search/monotonically-decreasing.cpp"
-using namespace std;
 
-typedef vector<int> vi;
-
-struct RangeLongestSubPalindrome {
+struct LongestSubPalindrome {  // TO BE TESTED
     vector<SparseTable<int>> st;
     template<class S>
-    RangeLongestSubPalindrome (const S& s) :
+    LongestSubPalindrome (const S& s) :
         st(2, SparseTable<int>(s.size(), [] (int x, int y) { return max(x, y); }))
     {
         array<vi, 2> d(manacher(s));

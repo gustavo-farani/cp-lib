@@ -1,10 +1,4 @@
-#include <vector>
-#include <algorithm>
-#include <queue>
-using namespace std;
-    
-#define pb push_back
-typedef vector<int> vi;
+#include "../../../template.cpp"
 
 const int BS = 320;
 

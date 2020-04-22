@@ -1,9 +1,4 @@
-#include <vector>
-#include <numeric>
-using namespace std;
-
-#define pb push_back
-typedef vector<int> vi;
+#include "../../template.cpp"
 
 struct DSU {       // union by size
     int n;

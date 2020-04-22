@@ -1,8 +1,4 @@
-#include <vector>
-#include <algorithm>
-using namespace std;
-
-#define pb push_back
+#include "../../template.cpp"
 
 template<typename T>
 struct CoordinateCompression {

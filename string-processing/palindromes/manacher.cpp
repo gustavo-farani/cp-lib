@@ -1,8 +1,4 @@
-#include <vector>
-#include <array>
-using namespace std;
-
-typedef vector<int> vi;
+#include "../../template.cpp"
 
 template<class S>
 array<vi, 2> manacher (const S& s) {

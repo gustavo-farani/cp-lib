@@ -1,4 +1,3 @@
-#include <vector>
 #include "../number-theory/modular-arithmetic/mod-base.cpp"
 
 const int ORDER = 3;

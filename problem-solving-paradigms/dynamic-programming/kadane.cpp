@@ -1,4 +1,4 @@
-typedef long long ll;
+#include "../../template.cpp"
 
 template <typename T>
 ll kadane (T first, T last) {

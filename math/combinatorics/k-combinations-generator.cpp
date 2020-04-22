@@ -1,8 +1,4 @@
-#include <vector>
-using namespace std;
-
-#define pb push_back
-typedef vector<int> vi;
+#include "../../template.cpp"
 
 template<class T>
 struct Combinator {

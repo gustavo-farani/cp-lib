@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../template.cpp"
 
 struct FlowNetwork {
     vector<vector<ll>> c, f;

@@ -1,7 +1,4 @@
-#include <vector>
-using namespace std;
-
-typedef long long ll;
+#include "../../../template.cpp"
 
 struct PrimalityTest {
     vector<bool> sieve;

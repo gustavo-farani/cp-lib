@@ -1,4 +1,4 @@
-#include "../representation/weighted-graph.cpp"
+#include "../../representation/weighted-graph.cpp"
 
 vector<ll> minimumDistances (const WeightedGraph& g, int s) {
     vector<ll> dist(g.last, LLONG_MAX);

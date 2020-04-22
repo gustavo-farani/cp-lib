@@ -1,5 +1,4 @@
 #include "matching-as-ending-position.cpp"
-using namespace std;
 
 template<class S>
 bool isCyclicShift (const S& s, const S& t) {

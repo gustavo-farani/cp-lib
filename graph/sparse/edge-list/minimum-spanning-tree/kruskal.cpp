@@ -1,4 +1,4 @@
-#include "../../data-structures/disjoint-sets-union/connection-test.cpp"
+#include "../../../../data-structures/disjoint-sets-union/connection-test.cpp"
 #include "../representation/graph.cpp"
 using namespace std;
 

@@ -1,8 +1,4 @@
-#include <vector>
-#include <algorithm>
-using namespace std;
-
-typedef vector<int> vi;
+#include "../../template.cpp"
 
 template <class T>
 struct LIS {
@@ -24,13 +20,9 @@ struct LIS {
             pred[i] = (j == 0 ? -1 : pos[j - 1]);
         }
     }
-    /*
-    Number of elements in a longest increasing subsequence (according to comp)
-    */
+    // number of elements in a longest increasing subsequence (according to comp)
     int size () { return pivot.size(); }
-    /*
-    Returns the INDICES of some longest increasing subsequence (according to comp)
-    */
+    // returns the INDICES of some longest increasing subsequence (according to comp)
     vi restore () {
         vector<T> lis;
         for (int i = pos.back(); i != -1; i = pred[i]) lis.pb(i);

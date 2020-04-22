@@ -1,6 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
-typedef long long ll;
+#include "../../../template.cpp"
 
 template<class T>
 struct DenseGraph {

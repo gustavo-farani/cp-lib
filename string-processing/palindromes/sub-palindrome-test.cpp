@@ -1,9 +1,4 @@
-#include <vector>
-#include <array>
 #include "manacher.cpp"
-using namespace std;
-
-typedef vector<int> vi;
 
 struct SubPalindromeTest {
     array<vi, 2> d;

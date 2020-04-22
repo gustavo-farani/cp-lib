@@ -1,8 +1,4 @@
-#include <vector>
-#include <string>
-using namespace std;
-
-typedef vector<int> vi;
+#include "../../template.cpp"
 
 template<class S>
 vi prefixFunction (const S &s) {

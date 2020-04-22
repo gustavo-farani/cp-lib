@@ -1,8 +1,4 @@
-#include <vector>
-using namespace std;
-
-#define pb push_back
-typedef long long ll;
+#include "../../../template.cpp"
 
 vector<ll> find (ll n) {
     vector<ll> d;

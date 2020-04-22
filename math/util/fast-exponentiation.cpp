@@ -1,4 +1,4 @@
-typedef long long ll;
+#include "../../template.cpp"
 
 template <class T>
 T fastExp (T a, ll n) {

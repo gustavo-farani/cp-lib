@@ -1,6 +1,5 @@
 #include "extended-euclidean-algorithm.cpp"
 
-typedef long long ll;
 typedef pair<ll, ll> pll;
 
 ll mod (ll a, ll m) {
@@ -23,7 +22,7 @@ pll positiveBounds (ll a, ll b, ll x0, ll y0) {
 
 pll solve (ll a, ll b, ll c) {
     ll m, n;
-    ll g = eea(a, b, m, n);
+    ll g = extendedEuclidean(a, b, m, n);
     if (c % g == 0) {
         ll x0 = m*(c/g);
         ll y0 = n*(c/g);

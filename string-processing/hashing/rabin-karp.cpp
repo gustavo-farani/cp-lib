@@ -1,9 +1,5 @@
-#include <cmath>
-#include <random>
-#include <vector>
-using namespace std;
+#include "../../template.cpp"
 
-typedef long long ll;
 typedef unsigned long long ull;
  
 const ll MOD = exp2(31) - 1;

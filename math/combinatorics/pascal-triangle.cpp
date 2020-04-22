@@ -1,6 +1,4 @@
-#include <vector>
 #include "../number-theory/modular-arithmetic/mod-base.cpp"
-using namespace std;
 
 struct PascalTriangle {
     vector<vector<MB>> memo;

@@ -1,8 +1,4 @@
-#include <vector>
 #include "suffix-array.cpp"
-using namespace std;
-
-typedef vector<int> vi;
 
 template<class S>
 struct PatternMatching {

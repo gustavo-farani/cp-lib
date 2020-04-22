@@ -1,9 +1,4 @@
 #include "prefix-function.cpp"
-#include <deque>
-#include <algorithm>
-using namespace std;
-
-typedef long long ll;
 
 template <class S>
 ll countSubstrings (const S& s) {

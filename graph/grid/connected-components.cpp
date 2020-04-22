@@ -1,12 +1,7 @@
-#include <vector>
-#include <tuple>
-using namespace std;
+#include "../../template.cpp"
 
-#define pb push_back
 #define x first
 #define y second
-typedef pair<int, int> ii;
-typedef vector<int> vi;
  
 // cardinal points: {{1, 0}, {0, 1}, {-1, 0}, {0, -1}}
 // intercardinal points: {{1, -1}, {-1, -1}, {-1, 1}, {1, 1}}

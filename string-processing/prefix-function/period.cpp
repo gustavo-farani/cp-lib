@@ -1,8 +1,4 @@
 #include "prefix-function.cpp"
-#include <vector>
-using namespace std;
-
-typedef vector<int> vi;
 
 template<class S>
 int period (const S& s) {

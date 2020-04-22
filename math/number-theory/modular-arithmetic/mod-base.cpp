@@ -1,8 +1,5 @@
-#include <iostream>
 #include "../../util/fast-exponentiation.cpp"
-using namespace std;
 
-typedef long long ll;
 const int MOD = 1e9 + 7;  // TODO MOD value is defined on the problem statement
     
 struct MB {

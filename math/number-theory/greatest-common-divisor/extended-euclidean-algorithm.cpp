@@ -1,10 +1,6 @@
-#include <tuple>
-using namespace std;
+#include "../../../template.cpp"
 
-typedef long long ll;
-typedef pair<ll, ll> pll;
-
-ll eea (ll a, ll b, ll &x, ll &y) {
+ll extendedEuclidean (ll a, ll b, ll &x, ll &y) {
 	ll r[] = {a, b};
 	ll q[] = {-1, -1};
 	ll m[] = {1, 0};

@@ -1,8 +1,4 @@
-#include <vector>
 #include "prefix-function.cpp"
-using namespace std;
-
-typedef vector<int> vi;
 
 template<class S>
 vi longestPrefixMatching (const S& s, const S& t) {

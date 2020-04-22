@@ -1,6 +1,4 @@
-#include <algorithm>
 #include "../number-theory/modular-arithmetic/mod-base.cpp"
-using namespace std;
 
 MB combinations (int n, int k) {
     k = min(n - k, k);

@@ -1,12 +1,4 @@
-#include <vector>
-#include <algorithm>
-#include <tuple>
-#include <queue>
-using namespace std;
-
-#define pb push_back
-typedef vector<int> vi;
-typedef long long ll;
+#include "../../template.cpp"
 
 struct FlowNetwork {
     vector<vi> adj;

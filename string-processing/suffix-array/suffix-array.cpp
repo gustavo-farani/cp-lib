@@ -1,10 +1,4 @@
-#include <vector>
-#include <string>
-#include <algorithm>
-using namespace std;
-
-#define pb push_back
-typedef vector<int> vi;
+#include "../../template.cpp"
 
 template<class S>
 vi suffixArray (const S& s) {

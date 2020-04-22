@@ -1,9 +1,4 @@
 #include "prefix-function.cpp"
-#include <vector>
-using namespace std;
-
-typedef vector<int> vi;
-#define pb push_back
 
 template<class S>
 vi prefixFrequencies (const S& s) {

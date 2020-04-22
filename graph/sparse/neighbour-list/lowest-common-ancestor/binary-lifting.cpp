@@ -1,4 +1,4 @@
-#include "../representation/graph.cpp"
+#include "../representation/weighted-graph.cpp"
 
 struct Rise {
     int anc;
