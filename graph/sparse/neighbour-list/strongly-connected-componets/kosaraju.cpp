@@ -17,27 +17,31 @@ vi stronglyConnectedComponents (const Graph& g) {
     }
     vector<bool> mark(g.last);
     deque<int> ts;
-    function<void(int)> topo = [&] (int u) {
+    function<void(int)> dfs[2];
+    dfs[0] = [&] (int u) {
         mark[u] = true;
-        for (int v : t.adj[u]) {
-            if (!mark[v]) topo(v);
+        for (int v : g.adj[u]) {
+            if (!mark[v]) dfs[0](v);
         }
         ts.push_front(u);
     };
     for (int u = g.first; u < g.last; u++) {
-        if (!mark[u]) topo(u);
+        if (!mark[u]) dfs[0](u);
     }
     int cnt = 0;
     vi scc(g.last);
-    function<void(int, int)> flood = [&] (int u, int label) {
-        scc[u] = label;
+    dfs[1]  = [&] (int u) {
+        scc[u] = cnt;
         mark[u] = false;
-        for (int v : g.adj[u]) {
-            if (mark[v]) flood(v, label);
+        for (int v : t.adj[u]) {
+            if (mark[v]) dfs[1](v);
         }
     };
     for (int u : ts) {
-        if (mark[u]) flood(u, cnt++);
+        if (mark[u]) {
+            dfs[1](u);
+            cnt++;
+        }
     }
     return scc;
 }
