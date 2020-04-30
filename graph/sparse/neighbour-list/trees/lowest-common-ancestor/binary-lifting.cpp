@@ -1,24 +1,23 @@
-#include "../representation/weighted-graph.cpp"
-
-struct Rise {
-    int anc;
-    ll best;
-    Rise (int u = 0) : anc(u), best(0) {}
-    Rise operator+ (Rise o) {
-        Rise ans;
-        ans.anc = o.anc;
-        ans.best = max(best, o.best); // !TODO merge paths
-        return ans;
-    }
-    void operator+= (Rise o) { *this = *this + o; }
-};
+#include "../../representation/weighted-graph.cpp"
 
 const int MAX_LG = 20;  // !TODO adjust maximum lg(|V|) according to input size
 
-struct BinaryLifting {
+struct TreePath {  // offline tree path query
+    struct Rise {
+        int anc;
+        ll best;
+        Rise (int u = 0) : anc(u), best(0) {}
+        Rise operator+ (Rise o) {
+            Rise ans;
+            ans.anc = o.anc;
+            ans.best = max(best, o.best); // !TODO merge paths
+            return ans;
+        }
+        void operator+= (Rise o) { *this = *this + o; }
+    };
     vi lvl;
     vector<vector<Rise>> up;
-    BinaryLifting (const WeightedGraph& g) :
+    TreePath (const WeightedGraph& g) :
        lvl(g.last), up(MAX_LG + 1, vector<Rise>(g.last))
     {  // g: weighted tree in neighbour list representation
         function<void(int, int)> dfs = [&] (int u, int par) {

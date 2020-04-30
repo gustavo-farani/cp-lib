@@ -1,10 +1,10 @@
-#include "../../../../data-structures/sparse-table/offline-subarray-minimum-query.cpp"
-#include "../representation/unweighted-graph.cpp"
+#include "../../../../../data-structures/sparse-table/offline-subarray-minimum-query.cpp"
+#include "../../representation/unweighted-graph.cpp"
 
-struct EulerTour {
+struct LCA {
     vi pre, lvl;
     SparseTable<int> st;
-    EulerTour (const Graph& g) :
+    LCA (const Graph& g) :
         pre(g.last), lvl(g.last), st((g.n << 1) - 1,
         [&] (int u, int v) { return lvl[u] <= lvl[v] ? u : v; })
     {  // g: unweighted tree in neighbour list representation
