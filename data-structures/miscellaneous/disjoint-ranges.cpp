@@ -2,16 +2,9 @@
 
 template<class T>
 struct DisjointRanges {
-    struct Range {
-        int l, r;
-        T x;
-        Range (int l, const pair<int, T>& p) :
-            l(l), r(p.first), x(p.second)
-        {}
-    };
     map<int, pair<int, T>> s;
-    vector<Range> update (int l, int r, T x) {  // closed intervals
-        vector<Range> bye;
+    vector<tuple<int, int, T>> update (int l, int r, T x) {  // closed intervals
+        vector<tuple<int, int, T>> bye;
         auto last = s.upper_bound(r);
         if (last != s.begin()) {
             auto it = prev(last);
@@ -24,13 +17,12 @@ struct DisjointRanges {
         if (first != s.begin()) {
             auto it = prev(first);
             if (it->second.first >= l) {
-                bye.emplace_back(l, it->second);
+                bye.pb({l, it->second.first, it->second.second});
                 it->second.first = l - 1;
             }
         }
-        while (first != last) {
-            bye.emplace_back(first->first, first->second);
-            first = s.erase(first);
+        for (auto it = first; it != last; it = s.erase(it)) {
+            bye.pb({it->first, it->second.first, it->second.second});
         }
         s.emplace_hint(last, l, make_pair(r, x));
         return bye;
