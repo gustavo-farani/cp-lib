@@ -22,3 +22,6 @@ array<vi, 2> manacher (const S& s) {
     }
     return d;
 }
+/* s: abaaba
+d[0]: 000300
+d[1]: 121121  */
