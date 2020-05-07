@@ -7,11 +7,11 @@ struct Edge {
 };
 
 struct FlowNetwork {
-    int first, last;
     vector<vi> adj;
     vector<Edge> e;
-    FlowNetwork (int n, bool base) :
-        first(base), last(n + base), adj(last)
+    vi dist, cur;
+    FlowNetwork (int n, bool b) :  // b: base indexation (0 or 1)
+        adj(n + b), dist(n + b), cur(n + b)
     {}
     void addArc (int u, int v, int w) {  // directed
         int z = e.size();
@@ -30,38 +30,34 @@ struct FlowNetwork {
     void push (int i, ll w) {
         e[i].flow += w, e[i ^ 1].flow -= w;
     }
-};
-
-ll maxFlow (FlowNetwork& g, int s, int t) {
-    vi dist(g.last), cur(g.last);
-    auto bfs = [&] () {
+    bool bfs (int s, int t) {
         fill(dist.begin(), dist.end(), INT_MAX);
         fill(cur.begin(), cur.end(), 0);
         queue<int> q({s});
         dist[s] = 0;
         while (!q.empty()) {
             int u = q.front(); q.pop();
-            for (int i : g.adj[u]) {
-                int v = g.e[i].to;
-                if (g.e[i].res() > 0 && dist[u] + 1 < dist[v]) {
+            for (int i : adj[u]) {
+                int v = e[i].to;
+                if (e[i].res() > 0 && dist[u] + 1 < dist[v]) {
                     dist[v] = dist[u] + 1;
                     q.push(v);
                 }
             }
         }
         return dist[t] < INT_MAX;
-    };
-    function<ll(int, ll)> dfs = [&] (int u, ll neck) {
+    }
+    ll dfs (int u, int t, ll neck) {
         if (u == t) {
             return neck;
         } else {
             ll w = 0;
-            while (cur[u] < g.adj[u].size()) {
-                int i = g.adj[u][cur[u]], v = g.e[i].to;
-                if (dist[v] == dist[u] + 1 && g.e[i].res() > 0) {
-                    w = dfs(v, min(neck, g.e[i].res()));
+            while (cur[u] < adj[u].size()) {
+                int i = adj[u][cur[u]], v = e[i].to;
+                if (dist[v] == dist[u] + 1 && e[i].res() > 0) {
+                    w = dfs(v, t, min(neck, e[i].res()));
                     if (w > 0) {
-                        g.push(i, w);
+                        push(i, w);
                         break;
                     }
                 }
@@ -69,8 +65,10 @@ ll maxFlow (FlowNetwork& g, int s, int t) {
             }
             return w;
         }
-    };
-    ll val = 0;
-    while (bfs()) for (ll w; w = dfs(s, LLONG_MAX); val += w);
-    return val;
-}
+    }
+    ll maxFlow (int s, int t) {
+        ll sum = 0;
+        while (bfs(s, t)) for (ll w; w = dfs(s, t, LLONG_MAX); sum += w);
+        return sum;
+    }
+};
