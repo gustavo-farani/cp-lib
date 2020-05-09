@@ -71,4 +71,7 @@ struct FlowNetwork {
         while (bfs(s, t)) for (ll w; w = dfs(s, t, LLONG_MAX); sum += w);
         return sum;
     }
+    // where is vertex u in a minimum cut (S, T)?
+    // false: u in S; true: u in T
+    bool cut (int u) { return dist[u] == INT_MAX; }
 };
