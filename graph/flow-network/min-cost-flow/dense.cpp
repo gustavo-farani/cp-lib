@@ -1,3 +1,5 @@
+#include "../../../template.cpp"
+
 struct Edge {
     int to;
     ll cap, flow, cost;
@@ -11,18 +13,18 @@ struct FlowNetwork {
     vector<ll> dist, pot, neck;
     vi from;
     vector<bool> taken;
-    FlowNetwork (int n, bool base) :
+    FlowNetwork (int n, bool base) :  // choose base indexation
         first(base), last(n + base), adj(last), dist(last),
         from(last), pot(last), neck(last), taken(last, true)
     {}
-    void addArc (int u, int v, ll cap, ll cost) {
+    void addArc (int u, int v, ll cap, ll cost) {  // directed edge
         int z = e.size();
         adj[u].pb(z);
         adj[v].pb(z + 1);
         e.pb(Edge{v, cap, 0, cost});
         e.pb(Edge{u, 0, 0, -cost});
     }
-    void spfa (int s) {
+    void spfa (int s) {  // computes initial potential values
         queue<int> q;
         for (int u = first; u < last; u++) q.push(u);
         while (!q.empty()) {
@@ -42,7 +44,7 @@ struct FlowNetwork {
             }
         }
     }
-    bool dijkstra (int s, int t) {
+    bool dijkstra (int s, int t) {  // suitable for dense networks
         fill(dist.begin(), dist.end(), LLONG_MAX);
         fill(from.begin(), from.end(), -1);
         fill(taken.begin(), taken.end(), false);
@@ -72,9 +74,9 @@ struct FlowNetwork {
         } while (!none);
         return from[t] != -1;
     }
-    ll minCostFlow (int s, int t, ll k) {
+    ll minCostFlow (int s, int t, ll k) {  // minimum cost flow with value exactly k
         ll value = 0, cost = 0;
-        spfa(s);
+        spfa(s);  // only necessary if original graph contains negative-cost edges
         while (value < k && dijkstra(s, t)) {
             ll aug = min(neck[t], k - value);
             for (int v = t; v != s; v = e[from[v] ^ 1].to) {
@@ -87,7 +89,7 @@ struct FlowNetwork {
                 if (dist[u] < LLONG_MAX) pot[u] += dist[u];
             }
         }
-        if (value < k) throw -1;  // max|f| < k
+        if (value < k) throw -1;  // impossible because maximum flow is less than k
         else return cost;
     }
 };
