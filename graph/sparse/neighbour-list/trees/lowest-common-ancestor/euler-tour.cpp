@@ -1,4 +1,4 @@
-#include "../../../../../data-structures/sparse-table/offline-subarray-minimum-query.cpp"
+#include "../../../../../data-structures/sparse-table/1D-generic.cpp"
 #include "../../representation/unweighted-graph.cpp"
 
 struct LCA {
