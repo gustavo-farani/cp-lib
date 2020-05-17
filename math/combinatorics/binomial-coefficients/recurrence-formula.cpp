@@ -1,8 +1,8 @@
-#include "../number-theory/modular-arithmetic/mod-base.cpp"
+#include "../../number-theory/modular-arithmetic/mod-base.cpp"
 
 struct PascalTriangle {
     vector<vector<MB>> memo;
-    PascalTriangle (int n) : memo(n + 1, vector<MB>(n + 1)) {}
+    PascalTriangle (int n) : memo(n + 1, vector<MB>(n + 1, -1)) {}
     MB operator() (int n, int k) {
         MB& ans = memo[n][k];
         if (ans == -1) {
