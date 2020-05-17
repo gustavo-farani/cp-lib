@@ -18,9 +18,5 @@ struct MB {
     void operator+= (MB o) { *this = *this + o; }
     void operator-= (MB o) { *this = *this - o; }
     void operator*= (MB o) { *this = *this * o; }
-    void operator/= (MB o) { *this = *this / o; }
     operator int() { return x; }  // direct comparisons to int values
 };
-
-istream& operator>> (istream& is, MB& m) { return is >> m.x; }  // reading easily
-ostream& operator<< (ostream& os, MB& m) { return os << m.x; }  // printing easily
