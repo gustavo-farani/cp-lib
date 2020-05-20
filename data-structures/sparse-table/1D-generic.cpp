@@ -7,7 +7,7 @@ struct SparseTable {
     function<T(T, T)> merge;
     SparseTable (int n, function<T(T, T)> merge) : lg(n + 1), merge(merge) {
         for (int i = 2; i <= n; i++) lg[i] = lg[i >> 1] + 1;
-        st.assign(lg[n] + 1, vi(n));
+        st.assign(lg[n] + 1, vector<T>(n));
     }
     T& at (int i) { return st[0][i]; } // array must be manually read
     void build (int n) {

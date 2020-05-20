@@ -1,3 +1,5 @@
+#include "../../template.cpp"
+
 template<class T>
 struct RangeMin {
     vector<vector<T>> st;

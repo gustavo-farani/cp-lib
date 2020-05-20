@@ -1,3 +1,5 @@
+#include "../../template.cpp"
+
 template<class T>
 struct RangeMax {
     vector<vector<T>> st;
