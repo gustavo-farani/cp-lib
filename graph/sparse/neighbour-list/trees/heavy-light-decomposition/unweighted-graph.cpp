@@ -8,8 +8,7 @@ struct HLD {
     // of segment tree array
     // segment tree array will be 1-based, with size g.n
     HLD (Graph& g) :
-        lvl(g.last), par(g.last), pre(g.last),
-        post(g.last), top(g.last)
+        lvl(g.last), par(g.last), pre(g.last), post(g.last), top(g.last)
     {
         vi sz(g.last);
         function<void(int)> dfs[2];
@@ -39,6 +38,19 @@ struct HLD {
             post[u] = t;
         };
         dfs[1](top[g.first] = g.first);
+    }
+    // lowest common ancestor of u and v
+    int lca (int u, int v) {
+        while (top[u] != top[v]) {
+            if (lvl[top[u]] < lvl[top[v]]) swap(u, v);
+            u = par[top[u]];
+        }
+        if (lvl[u] > lvl[v]) swap(u, v);
+        return u;
+    }
+    // number of edges in the path from u to v
+    int dist (int u, int v) {
+        return lvl[u] + lvl[v] - (lvl[lca(u, v)] << 1);
     }
     // the range of the segment tree including all the nodes
     // in the subtree rooted at u

@@ -51,18 +51,19 @@ struct HLD {
     ii subtree (int u) {
         return {pre[u], post[u]};
     }
-    // sum of the weights of the edges along the path from u to v
-    // assumes edge weights are constant
-    ll distance (int u, int v) {
-        ll sum = 0;
+    // lowest common ancestor of u and v
+    int lca (int u, int v) {
         while (top[u] != top[v]) {
             if (lvl[top[u]] < lvl[top[v]]) swap(u, v);
-            sum += dist[u] - dist[par[top[u]]];
             u = par[top[u]];
         }
-        if (lvl[u] < lvl[v]) swap(u, v);
-        sum += dist[u] - dist[v];
-        return sum;
+        if (lvl[u] > lvl[v]) swap(u, v);
+        return u;
+    }
+    // sum of the weights of the edges along the path from u to v
+    // assumes edge weights are constant
+    ll dist (int u, int v) {
+        return dist[u] + dist[v] - (dist[lca(u, v)] << 1);
     }
     // returns the ranges of the segment tree array covering
     // the vertices along the path from u to v
