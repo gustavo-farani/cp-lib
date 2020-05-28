@@ -5,5 +5,5 @@ int search (int l, int r, F test) { // 000[1]11
         if (test(m)) r = m;
         else l = m + 1;
     }
-    return test(l) ? l : l + 1;
+    return test(l) ? l : l + 1;  // 000000[]
 }

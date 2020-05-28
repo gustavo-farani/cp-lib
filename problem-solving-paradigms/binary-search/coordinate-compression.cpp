@@ -3,7 +3,7 @@
 template<typename T>
 struct CoordinateCompression {
     vector<T> o;
-    void push (T&& x) { o.pb(x); }  // moved
+    void push (const T& x) { o.pb(x); }
     int build () {
         sort(o.begin(), o.end());
         o.resize(unique(o.begin(), o.end()) - o.begin());
