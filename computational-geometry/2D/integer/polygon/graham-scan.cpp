@@ -7,6 +7,7 @@
 // NOTE: at the first position of the outputed hull, there will
 // be the lexicographically smallest point in v - the point with
 // minimal x coordinate (and minimal y coordinate, in case of a tie)
+// NOTE: raises RunTime Error is v is empty
 // NOTE: if v contains only a single point, the hull will contain
 // just that point
 // NOTE: if the points in v are all colinear, the computed hull
