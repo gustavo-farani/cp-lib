@@ -6,5 +6,10 @@ struct Polygon {
     Polygon (vector<PT>&& v) : sides(v.size()), p(v) {
         p.pb(p.front()); // facilitates iteration through edges
     }
-    PT operator[] (int i) const { return p[i]; }  // acess ith vertex
+    ld shoelace();
+    ld area();
+    bool ccw();
+    bool cw();
+    int contains (const PT& q);
+    Polygon cut (const PT& q, const PT& v);
 };

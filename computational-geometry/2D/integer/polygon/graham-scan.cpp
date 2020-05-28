@@ -1,4 +1,4 @@
-#include "../polygon.cpp"
+#include "../vector/point.cpp"
 
 // v: two points never coincide, but the points may be all colinear
 // (v is modified)
@@ -17,13 +17,13 @@ vector<PT> convexHull (vector<PT>& v) {
     iter_swap(v.begin(), min_element(v.begin(), v.end()));
     sort(next(v.begin()), v.end(), [&] (const PT& p, const PT& q) {
         PT u = p - v[0], w = q - v[0];
-        ll c = u ^ w;
+        ll c = u % w;
         return c == 0 ? u < w : c > 0;
     });
     vector<PT> h(v.size());
     int sz = 0;
     for (const PT& p : v) {
-        while (sz > 1 && (h[sz-1]-h[sz-2] ^ p-h[sz-1]) <= 0) sz--;
+        while (sz > 1 && (p - h[sz - 1]) % (h[sz - 1] - h[sz - 2]) >= 0) sz--;
         h[sz++] = p;
     }
     h.resize(sz);

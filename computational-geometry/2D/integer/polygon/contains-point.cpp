@@ -1,23 +1,21 @@
-struct ConvexPolygon {
-    int sides;
-    vector<PT> p;
-    ConvexPolygon (vector<PT>&& v) : sides(v.size()), p(v) {
-        // next line is unecessary if v was outputed from Grahan Scan
-        rotate(p.begin(), min_element(p.begin(), p.end()), p.end());
-        p.pb(p.front()); // facilitates iteration through edges
+#include "polygon.cpp"
+#include "../../../../problem-solving-paradigms/binary-search/monotonically-decreasing.cpp"
+
+// localizes point q with relation to this polygon
+// returns 0, if q lies outside the polygon
+// returns 1, if q lies on the boundaries of the polygon (on some edge or vertex)
+// returns 2, if q lies strictly inside the polygon
+// complexity: O(lg(sides))
+// polygon must be convex, with at least 3 vertices, listed counterclockwise
+int Polygon::contains (const PT& q) {
+    PT u = q - p[0], v = p[1] - p[0], w = p[sides - 1] - p[0];
+    if (v % u >= 0 && u % w >= 0) {
+        int i = search(1, sides - 2, [&] (int i) {
+            return (p[i] - p[0]) % u >= 0;
+        });
+        ll c = (p[i + 1] - p[i]) % (q - p[i]);
+        if (c == 0) return 1;
+        else if (c > 0) return u % v == 0 || u % w == 0 ? 1 : 2;
     }
-    bool contains (const PT& q) {
-        PT u = q - p[0];
-        if (ccw(u, p[1] - p[0]) || ccw(p[sides - 1] - p[0], u)) {
-            return false;
-        } else {
-            int l = 1, r = sides - 1;
-            while (r - l > 1) {
-                int m = l + r >> 1;
-                if (!ccw(u, p[m] - p[0])) l = m;
-                else r = m;
-            }
-            return !ccw(q - p[l], p[l + 1] - p[l]);
-        }
-    }
-};
+    return 0;
+}

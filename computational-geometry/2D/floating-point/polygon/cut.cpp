@@ -1,23 +1,15 @@
-#include "../vector/orientation.cpp"
-#include "../line/vector-form.cpp"
-#include "../line/intersection.cpp"
 #include "polygon.cpp"
+#include "../line/line.cpp"
 
-// whether points a and b are in separate half-planes w.r.t. line l
-bool oppose (const Line& l, const PT& a, const PT& b) {
-    return !l.contains(a) && !l.contains(b)
-    && lt0((a - l.p ^ l.d)*(b - l.p ^ l.d));
-}
-
-// cuts the part of this convex (fails if concave)
-// polygon situated in the counterclockwise
-// half-plane w.r.t. the direction vector of line l
-Polygon cut (const Polygon& p, const Line& l) {
+// cuts the part of this convex (fails if concave) polygon
+// situated in the counterclockwise half-plane
+// with relation to the line directed by v and containing q
+Polygon Polygon::cut (const PT& q, const PT& v) {
     vector<PT> c;
-    for (int i = 0; i < p.sides; i++) {
-        if (ccw(l.d, p[i] - l.p)) c.pb(p[i]);
-        if (oppose(l, p[i], p[i + 1])) {
-            c.pb(l & Line(p[i], p[i + 1]));
+    for (int i = 0; i < sides; i++) {
+        if (gt0(v % (p[i] - q))) c.pb(p[i]);
+        if (Line::oppose(q, v, p[i], p[i + 1])) {
+            c.pb(Line::intersection(q, v, p[i], p[i + 1] - p[i]));
         }
     }
     return c;
