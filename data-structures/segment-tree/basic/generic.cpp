@@ -1,38 +1,35 @@
 #include "../../../template.cpp"
 
-struct Node {
-    Node operator+ (Node o);
-    void leaf (int x);
-} NIL;
-
-template<class T>
-struct SegmentTree {
-    vector<Node> tree;
-    SegmentTree (int n) :
-        tree(n << 2, NIL)
-    {}
-    void update (int i, int l, int r, int p, T x) {
-        if (p > r || p < l) {
+template<class U, class Q>
+struct SegTree {
+    vector<U> tree;
+    SegTree (int n) : tree(n << 2) {}
+    void update (int i, U x, int l, int r, int p = 1) {
+        if (i > r || i < l) {
             return;
         } else if (l == r) {
-            tree[i].leaf(x);
+            tree[p] = x;
         } else {
             int m = l + r >> 1;
-            int lc = i << 1, rc = (i << 1) + 1;
-            update(lc, l, m, p, x);
-            update(rc, m + 1, r, p, x);
-            tree[i] = tree[lc] + tree[rc];
+            int lc = p << 1, rc = (p << 1) + 1;
+            update(i, x, l, m, lc);
+            update(i, x, m + 1, r, rc);
+            // TODO! parent based on children
+            tree[p] = tree[lc] + tree[rc];
         }
     }
-    Node query (int i, int l, int r, int ql, int qr) {
+    Q query (int ql, int qr, int l, int r, int p = 1) {
         if (r < ql || l > qr) {
-            return NIL;
+            // TODO! neutral value
+            return 0;
         } else if (ql <= l && r <= qr) {
-            return tree[i];
+            // TODO! fully covered sub-range
+            return tree[p];
         } else {
             int m = l + r >> 1;
-            int lc = i << 1, rc = (i << 1) + 1;
-            return query(lc, l, m, ql, qr) + query(rc, m + 1, r, ql, qr);
+            int lc = p << 1, rc = (p << 1) + 1;
+            // TODO! query binary operation
+            return query(ql, qr, l, m, lc) + query(ql, qr, m + 1, r, rc);
         }
     }
 };
