@@ -1,4 +1,4 @@
-#include "../../../../template.cpp"
+#include "../../../template.cpp"
 
 ii inter (ii a, ii b) {
     if (b.first < a.first) swap(a, b);
@@ -7,7 +7,7 @@ ii inter (ii a, ii b) {
 
 struct Rect {
     ii x, y;
-    Rect operator^ (Rect o) {
+    Rect operator& (Rect o) {
         return Rect{inter(x, o.x), inter(y, o.y)};
     }
     bool empty () {

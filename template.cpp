@@ -7,4 +7,3 @@ typedef long long ll;
 typedef vector<int> vi;
 typedef pair<int, int> ii;
 typedef double ld;
-template<typename T> using min_heap = priority_queue<T, vector<T>, greater<T>>;
