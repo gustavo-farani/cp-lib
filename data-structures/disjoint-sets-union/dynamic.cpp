@@ -3,11 +3,13 @@
 // same functionality as regular DSU,
 // but stores data in maps, instead of arrays
 // space complexity gets better, but time complexity gets worse
+template<class T>
 struct DSU {
     int n;
-    map<int, int> par, sz;
+    map<T, T> par;
+    map<T, int> sz;
     DSU (int n) : n(n) {}
-    int find (int u) {
+    T find (T u) {
         auto it = par.lower_bound(u);
         if (it == par.end() || it->first != u) {
             it = par.emplace_hint(it, u, u);
@@ -16,14 +18,14 @@ struct DSU {
         }
         return it->second;
     }
-    int& size (int u) {
+    int& size (T u) {
         auto it = sz.lower_bound(u);
         if (it == sz.end() || it->first != u) {
             it = sz.emplace_hint(it, u, 1);
         }
         return it->second;
     }
-    void merge (int u, int v) {
+    void merge (T u, T v) {
         u = find(u), v = find(v);
         if (u != v) {
             n--;
