@@ -1,6 +1,13 @@
 #include "point.cpp"
 
-bool circlesIntersect (PT c1, ll r1, PT c2, ll r2) {
-    PT v = c2 - c1;
-    return norm(v) <= r1*r1 + (r1*r2 << 1) + r2*r2;
+struct Circle {
+    PT c;
+    ll r;
+    Circle (PT c, ll r) : c(c), r(r) {}
+    bool contains (PT p) { return norm(p - c) <= r*r; }
+};
+
+bool circlesIntersect (Circle a, Circle b) {
+    PT v = b.c - a.c;
+    return norm(v) <= a.r*a.r + (a.r*b.r << 1) + b.r*b.r;
 }
