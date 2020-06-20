@@ -1,27 +1,13 @@
 #include "../../template.cpp"
 
-struct Quantifier {
-    bool b;   // b = 0 for 0-based, b = 1 for 1-based (indexation)
-    vi pref;
-    Quantifier (int n, bool b) : pref(n + 1), b(b) {}
-    int& operator[] (int i) {
-        return pref[i + 1 - b];
-    }
-    void build (int n) {
-        for (int i = 1; i <= n; i++) {
-            pref[i] += pref[i - 1];
-        }
-    }
+struct BitCount {
+    vi sum;
+    BitCount (int n, bool base) : sum(n + base) {}
+    void build () { partial_sum(sum.begin(), sum.end()); }
     int count (int l, int r) {
-        return pref[r + 1 - b] - pref[l - b];
+    	return l == 0 ? sum[r] : sum[r] - sum[l - 1];
     }
-    bool all (int l, int r) {
-        return (count(l, r) == r - l + 1);
-    }
-    bool any (int l, int r) {
-        return (count(l, r) > 0);
-    }
-    bool none (int l, int r) {
-        return (count(l, r) == 0);
-    }
+    bool all (int l, int r) { return count(l, r) == r - l + 1; }
+    bool any (int l, int r) { return count(l, r) > 0; }
+    bool none (int l, int r) { return count(l, r) == 0; }
 };
