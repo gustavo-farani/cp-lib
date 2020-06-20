@@ -12,7 +12,7 @@ vi stronglyConnectedComponents (const Graph& g) {
     vi pre(g.last), low(g.last), scc(g.last);
     vector<bool> on(g.last);
     stack<int> s;
-    function<void(int u, int par)> dfs = [&] (int u, int par) {
+    function<void(int, int)> dfs = [&] (int u, int par) {
         low[u] = pre[u] = ++cnt;
         s.push(u);
         on[u] = true;
