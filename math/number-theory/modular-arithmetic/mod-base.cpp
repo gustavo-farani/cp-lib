@@ -1,7 +1,7 @@
-#include "../../util/fast-exponentiation.cpp"
+#include "fast-exponentiation.cpp"
 
 const int MOD = 1e9 + 7;  // TODO MOD value is defined on the problem statement
-    
+
 struct MB {
     int x;
     MB (int x = 0) : x(x) {}  // implicit conversion in assignment statements
