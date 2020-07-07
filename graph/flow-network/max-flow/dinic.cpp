@@ -1,33 +1,34 @@
-#include "../../template.cpp"
+#include "../../../template.cpp"
 
-struct Edge {
-    int to;
-    ll cap, flow;
-    ll res () { return cap - flow; }
-};
-
+template<class T>
 struct FlowNetwork {
+    struct Edge {
+        int to;
+        T cap, flow;
+        Edge (int v, T w) : to(v), cap(w), flow(0) {}
+        T res () { return cap - flow; }
+    };
     vector<vi> adj;
     vector<Edge> e;
     vi dist, cur;
     FlowNetwork (int n, bool b) :  // b: base indexation (0 or 1)
         adj(n + b), dist(n + b), cur(n + b)
     {}
-    void addArc (int u, int v, int w) {  // directed
+    void addArc (int u, int v, T w) {  // directed
         int z = e.size();
         adj[u].pb(z);
         adj[v].pb(z + 1);
-        e.pb(Edge{v, w, 0});
-        e.pb(Edge{u, 0, 0});
+        e.emplace_back(v, w);
+        e.emplace_back(u, 0);
     }
-    void addEdge (int u, int v, int w) {  // bidirectional
+    void addEdge (int u, int v, T w) {  // bidirectional
         int z = e.size();
         adj[u].pb(z);
         adj[v].pb(z + 1);
-        e.pb(Edge{v, w, 0});
-        e.pb(Edge{u, w, 0});
+        e.emplace_back(v, w);
+        e.emplace_back(u, w);
     }
-    void push (int i, ll w) {
+    void push (int i, T w) {
         e[i].flow += w, e[i ^ 1].flow -= w;
     }
     bool bfs (int s, int t) {
@@ -47,11 +48,11 @@ struct FlowNetwork {
         }
         return dist[t] < INT_MAX;
     }
-    ll dfs (int u, int t, ll neck) {
+    T dfs (int u, int t, T neck) {
         if (u == t) {
             return neck;
         } else {
-            ll w = 0;
+            T w = 0;
             while (cur[u] < adj[u].size()) {
                 int i = adj[u][cur[u]], v = e[i].to;
                 if (dist[v] == dist[u] + 1 && e[i].res() > 0) {
@@ -66,9 +67,11 @@ struct FlowNetwork {
             return w;
         }
     }
-    ll maxFlow (int s, int t) {
-        ll sum = 0;
-        while (bfs(s, t)) for (ll w; w = dfs(s, t, LLONG_MAX); sum += w);
+    T maxFlow (int s, int t) {
+        T sum = 0;
+        while (bfs(s, t)) {
+            for (T w; w = dfs(s, t, numeric_limits<T>::max()); sum += w);
+        }
         return sum;
     }
     // where is vertex u in a minimum cut (S, T)?
