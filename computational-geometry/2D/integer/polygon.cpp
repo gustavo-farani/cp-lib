@@ -7,6 +7,29 @@ struct Polygon {
     vector<PT> p;
     Polygon (vector<PT>&& v) : sides(v.size()), p(v) {}
     int next (int i) { return i == sides - 1 ? 0 : i + 1; }
+
+    ll shoelace () {
+        ll sum = 0;
+        for (int i = 0; i < sides; i++) sum += p[i] % p[next(i)];
+        return sum;
+    }
+    bool cw () { return shoelace() < 0; }
+    bool ccw () { return shoelace() > 0; }
+
+    // Pick's Theorem
+    // computes the number of points with integer coordinates in this polygon
+    // polygon must not be self-intersecting
+    // boolean parameter border: whether the points lying on the boundary
+    // (on edges or vertices) should be counted or not
+    ll latticePoints (bool border) {
+        ll b = 0;
+        for (int i = 0; i < sides; i++) {
+            PT v = p[next(i)] - p[i];
+            b += abs(gcd(v.x, v.y));  // C++ 17 only
+        }
+        return ((abs(shoelace()) - b + 2) >> 1) + border*b;
+    }
+
     // localizes point q with relation to this polygon
     // returns 0, if q lies outside the polygon
     // returns 1, if q lies on the boundaries of the polygon (on some edge or vertex)
@@ -25,6 +48,7 @@ struct Polygon {
         }
         return 0;
     }
+
     // Crossing-Number or Cutting-Ray Test
     // localizes point q with relation to this polygon
     // returns 1, if q lies outside the polygon
