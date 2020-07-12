@@ -1,11 +1,8 @@
 #include "../../template.cpp"
 
-template<class T, class I>
-T maximumSum (I first, I last) {
+template<class T, class S>
+T maximumSum (const S& s) {
     T global = numeric_limits<T>::min(), local = 0;
-    for (I it = first; it != last; it++) {
-        local = max(*it, *it + local);
-        global = max(global, local);
-    }
+    for (T x : s) global = max(global, local = max(x, x + local));
     return global;
 }
