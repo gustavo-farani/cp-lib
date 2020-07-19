@@ -4,7 +4,7 @@
 
 struct BipartiteGraph {
     int n, m;
-    FlowNetwork g;
+    FlowNetwork<short> g;
     BipartiteGraph (int n, int m) : n(n), m(m), g(n + m + 2, 0) {
         for (int i = 0; i < n; i++) g.addArc(0, i + 2, 1);
         for (int i = 0; i < m; i++) g.addArc(i + n + 2, 1, 1);

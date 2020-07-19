@@ -1,24 +1,24 @@
 #include "../../representation/weighted-graph.cpp"
 
-const int MAX_LG = 20;  // !TODO adjust maximum lg(|V|) according to input size
+const int MAX_LG = 20;  // TODO adjust maximum lg(|V|) according to input size
 
-struct TreePath {  // offline tree path query
-    struct Rise {
+struct BinaryLifting {  // offline tree path query
+    struct TreePath {
         int anc;
         ll best;
-        Rise (int u = 0) : anc(u), best(0) {}
-        Rise operator+ (Rise o) {
-            Rise ans;
+        TreePath (int u = 0) : anc(u), best(0) {}
+        TreePath operator+ (TreePath o) {
+            TreePath ans;
             ans.anc = o.anc;
             ans.best = max(best, o.best); // !TODO merge paths
             return ans;
         }
-        void operator+= (Rise o) { *this = *this + o; }
+        void operator+= (TreePath o) { *this = *this + o; }
     };
     vi lvl;
-    vector<vector<Rise>> up;
-    TreePath (const WeightedGraph& g) :
-       lvl(g.last), up(MAX_LG + 1, vector<Rise>(g.last))
+    vector<vector<TreePath>> up;
+    BinaryLifting (const Graph& g) :
+       lvl(g.last), up(MAX_LG + 1, vector<TreePath>(g.last))
     {  // g: weighted tree in neighbour list representation
         function<void(int, int)> dfs = [&] (int u, int par) {
             for (auto [w, v] : g.adj[u]) {  // C++ 17
@@ -35,8 +35,8 @@ struct TreePath {  // offline tree path query
         };
         dfs(g.first, g.first);
     }
-    Rise lift (int u, int k) {
-        Rise ans(u);
+    TreePath lift (int u, int k) {
+        TreePath ans(u);
         for (int i = 0; k; i++, k >>= 1) {
             if (k & 1) {
                 ans += up[i][u];
@@ -45,9 +45,9 @@ struct TreePath {  // offline tree path query
         }
         return ans;
     }
-    Rise query (int u, int v) {
+    TreePath query (int u, int v) {
         if (lvl[u] < lvl[v]) swap(u, v);
-        Rise ans = lift(u, lvl[u] - lvl[v]);
+        TreePath ans = lift(u, lvl[u] - lvl[v]);
         u = ans.anc;
         if (u != v) {
             for (int i = MAX_LG; i >= 0; i--) {

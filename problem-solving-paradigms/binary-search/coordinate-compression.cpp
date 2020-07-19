@@ -6,7 +6,7 @@ struct CoordinateCompression {
     void push (const T& x) { o.pb(x); }
     int build () {
         sort(o.begin(), o.end());
-        o.resize(unique(o.begin(), o.end()) - o.begin());
+        o.erase(unique(o.begin(), o.end()), o.end());
         return o.size();
     }
     int operator() (const T &x) {   // 0-based

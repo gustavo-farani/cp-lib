@@ -1,9 +1,10 @@
 #include "../../representation/weighted-graph.cpp"
+
 #include <ext/pb_ds/priority_queue.hpp>
 template<class T> using min_heap = __gnu_pbds::priority_queue<T, greater<T>>;
 
 template<class T>
-vector<T> minimumDistances (const WeightedGraph& g, int s) {
+vector<T> minimumDistances (const Graph& g, int s) {
     vector<T> dist(g.last, numeric_limits<T>::max());
     min_heap<pair<T, int>> pq;
     vector<typename min_heap<pair<T, int>>::point_iterator> at(g.first);
@@ -24,7 +25,7 @@ vector<T> minimumDistances (const WeightedGraph& g, int s) {
 }
 
 template<class T>
-vi shortestPaths (const WeightedGraph& g, int s) {
+vi shortestPaths (const Graph& g, int s) {
     vector<T> dist(g.last, numeric_limits<T>::max());
     vi from(g.last, -1);
     min_heap<pair<T, int>> pq;

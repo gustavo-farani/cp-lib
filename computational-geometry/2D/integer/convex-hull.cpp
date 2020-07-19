@@ -33,7 +33,7 @@ vector<PT> convexHull (vector<PT>& v) {
 }
 
 // Andrew's Monotone Chain Algorithm
-// v: points already sorted lexicographically and pairwise distinct
+// v: points ALREADY SORTED lexicographically and pairwise distinct
 // return: convex-hull of v, with vertices in counterclockwise order,
 // without contiguous colinear edges
 // NOTE: if v is empty, it won't raise an exception

@@ -19,8 +19,8 @@ struct Graph {
     vector<vi> adj;
     // base == 0: vertices indices in range [0, n)
     // base == 1: vertices indices in range [1, n]
-    Graph (int n, bool base) :
-        first(base), last(n + base), n(n), adj(last)
+    Graph (int n, bool b) :
+        first(b), last(n + b), n(n), adj(last)
     {}
     void addEdge (const T& edge) {
         int z = e.size();   // 0-based indexation for edges

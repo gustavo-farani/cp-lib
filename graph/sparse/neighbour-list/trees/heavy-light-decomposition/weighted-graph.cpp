@@ -8,7 +8,7 @@ struct HLD {
     // ith vertice in g will be mapped to position pre[i]
     // of segment tree array
     // segment tree array will be 1-based, with size g.n
-    HLD (WeightedGraph& g) :
+    HLD (Graph& g) :
         lvl(g.last), par(g.last), pre(g.last),
         post(g.last), top(g.last), dist(g.last)
     {

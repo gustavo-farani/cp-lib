@@ -10,14 +10,3 @@ T fastExp (T a, ll n) {
     }
     return ans;
 }
-
-#include "mod-base.cpp"
-#include "../factorization/totient-function.cpp"
-
-// Trick for computing (a ^ n) mod m
-// NOTE: assumes n >= log2(m)
-int modExp (int a, int n, int m) {
-    int d = phi(m), r = n % d;
-    MOD = m;
-    return fastExp(MB(a), d + r);
-}

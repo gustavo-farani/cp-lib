@@ -1,10 +1,10 @@
 #include "../../../../../data-structures/sparse-table/1D-generic.cpp"
 #include "../../representation/unweighted-graph.cpp"
 
-struct LCA {
+struct EulerTour {
     vi pre, lvl;
     SparseTable<int> st;
-    LCA (const Graph& g) :
+    EulerTour (const Graph& g) :
         pre(g.last), lvl(g.last), st((g.n << 1) - 1,
         [&] (int u, int v) { return lvl[u] <= lvl[v] ? u : v; })
     {  // g: unweighted tree in neighbour list representation

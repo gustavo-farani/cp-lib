@@ -1,4 +1,5 @@
-#include "point.cpp" // + PT::operator<
+#include "../vector/point.cpp"
+#include "../vector/comparison.cpp"
 
 // v: two points never coincide, but the points may be all colinear
 // (v is modified)

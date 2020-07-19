@@ -1,51 +1,53 @@
 #include "../../template.cpp"
 
-#define x first
-#define y second
-
 // cardinal points: {{1, 0}, {0, 1}, {-1, 0}, {0, -1}}
 // intercardinal points: {{1, -1}, {-1, -1}, {-1, 1}, {1, 1}}
-vector<ii> windrose({{1, 0}, {0, 1}, {-1, 0}, {0, -1}});
+const vector<ii> windrose({{1, 0}, {0, 1}, {-1, 0}, {0, -1}});
 
 struct Grid {
-    vector<vector<bool>> pass;  // if passable
-    vector<vi> dist;
+    vector<vi> g, dist;
     Grid (int n, int m) :
-        pass(n + 2, vector<bool>(m + 2, false)),
-        dist(n + 2, vi(m + 2, INT_MAX))
+        g(n + 2, vi(m + 2)), dist(n + 2, vi(m + 2))
     {}
-    void minimumDistances (const ii &s) {   // Single-Source Breadth-First-Search
+    int& at (int i, int j) { return g[i][j]; }
+    // Single-Source Breadth-First-Search
+    vector<vi>& minimumDistances (int si, int sj) {
+        for (vi& a : dist) fill(a.begin(), a.end(), INT_MAX);
         queue<ii> q;
-        dist[s.x][s.y] = 0;
-        q.push(s);
+        dist[si][sj] = 0;
+        q.emplace(si, sj);
         while (!q.empty()) {
-            ii &u = q.front();
-            for (ii &d : windrose) {
-                ii v(u.x + d.x, u.y + d.y);
-                if (pass[v.x][v.y] && dist[v.x][v.y] == INT_MAX) {
-                    dist[v.x][v.y] = 1 + dist[u.x][u.y];
-                    q.push(v);
+            auto [ui, uj] = q.front();  // C++ 17 only
+            q.pop();
+            for (const ii &d : windrose) {
+                int vi = ui + d.first, vj = uj + d.second;
+                if (g[vi][vj] && dist[vi][vj] == INT_MAX) {
+                    dist[vi][vj] = 1 + dist[ui][uj];
+                    q.emplace(vi, vj);
                 }
             }
-            q.pop();
         }
+        return dist;
     }
-    void minimumDistances (const vector<ii> &s) {  // Multi-Source Breadth-First-Search
+    // Multi-Source Breadth-First-Search
+    vector<vi>& minimumDistances (const vector<ii> &s) {
+        for (vi& a : dist) fill(a.begin(), a.end(), INT_MAX);
         queue<ii> q;
-        for (ii u : s) {
-            dist[u.x][u.y] = 0;
-            q.push(u);
+        for (auto [si, sj] : s) {  // C++ 17 only
+            dist[si][sj] = 0;
+            q.emplace(si, sj);
         }
         while (!q.empty()) {
-            ii &u = q.front();
-            for (ii &d : windrose) {
-                ii v(u.x + d.x, u.y + d.y);
-                if (pass[v.x][v.y] && dist[v.x][v.y] == INT_MAX) {
-                    dist[v.x][v.y] = 1 + dist[u.x][u.y];
-                    q.push(u);
+            auto [ui, uj] = q.front();  // C++ 17 only
+            q.pop();
+            for (const ii &d : windrose) {
+                int vi = ui + d.first, vj = uj + d.second;
+                if (g[vi][vj] && dist[vi][vj] == INT_MAX) {
+                    dist[vi][vj] = 1 + dist[ui][uj];
+                    q.emplace(vi, vj);
                 }
             }
-            q.pop();
         }
+        return dist;
     }
 };

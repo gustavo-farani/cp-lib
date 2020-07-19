@@ -2,7 +2,7 @@
 
 // cardinal points: {{1, 0}, {0, 1}, {-1, 0}, {0, -1}}
 // intercardinal points: {{1, -1}, {-1, -1}, {-1, 1}, {1, 1}}
-vector<ii> windrose({{1, 0}, {0, 1}, {-1, 0}, {0, -1}});
+const vector<ii> windrose({{1, 0}, {0, 1}, {-1, 0}, {0, -1}});
  
 struct Grid {
     vector<vi> g, c;
