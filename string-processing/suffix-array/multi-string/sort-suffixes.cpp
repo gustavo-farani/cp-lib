@@ -1,7 +1,6 @@
 #include "../../../template.cpp"
 
 // v: vector of strings
-// n: sum of lengths of strings in v
 // sorts lexicographically the suffixes from all the strings,
 // at a time complexity of O(n lg^2 n)
 // returns sa: the multi-string suffix array,
