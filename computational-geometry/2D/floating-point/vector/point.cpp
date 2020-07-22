@@ -1,4 +1,4 @@
-#include "../../../../template.cpp"
+#include "../../../../boilerplate.cpp"
 
 const double EPS = 1e-9;
 int sgn (double t) { return abs(t) < EPS ? 0 : (t > 0) - (t < 0); }

@@ -1,4 +1,4 @@
-#include "../../../template.cpp"
+#include "../../../boilerplate.cpp"
 
 // v: vector of strings
 // sorts lexicographically the suffixes from all the strings,

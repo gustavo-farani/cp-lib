@@ -1,4 +1,4 @@
-#include "../../template.cpp"
+#include "../../boilerplate.cpp"
 
 // lim[i] = {l, r}, both inclusive pointers bounding the
 // neighbourhood under the domain of v[i]

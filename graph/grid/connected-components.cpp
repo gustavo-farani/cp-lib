@@ -1,4 +1,4 @@
-#include "../../template.cpp"
+#include "../../boilerplate.cpp"
 
 // cardinal points: {{1, 0}, {0, 1}, {-1, 0}, {0, -1}}
 // intercardinal points: {{1, -1}, {-1, -1}, {-1, 1}, {1, 1}}

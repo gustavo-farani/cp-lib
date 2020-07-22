@@ -1,4 +1,4 @@
-#include "../../../template.cpp"
+#include "../../../boilerplate.cpp"
 
 template<class F>
 void divisors (ll n, F get) {

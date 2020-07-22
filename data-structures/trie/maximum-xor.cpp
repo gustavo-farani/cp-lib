@@ -1,4 +1,4 @@
-#include "../../template.cpp"
+#include "../../boilerplate.cpp"
 
 const int N = 1e5 + 5;
 const int MS = N << 5, MSB = 1 << 30;

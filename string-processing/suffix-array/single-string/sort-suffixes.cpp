@@ -1,4 +1,4 @@
-#include "../../../template.cpp"
+#include "../../../boilerplate.cpp"
 
 template<class S>
 vi sortSuffixes (const S& s) {  // O(n lg n)

@@ -1,4 +1,4 @@
-#include "../../../../template.cpp"
+#include "../../../../boilerplate.cpp"
 
 struct UE {      // Unweighted Edge
     int from, to;

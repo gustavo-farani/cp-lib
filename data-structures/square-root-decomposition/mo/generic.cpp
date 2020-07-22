@@ -1,4 +1,4 @@
-#include "../../../template.cpp"
+#include "../../../boilerplate.cpp"
 
 const int BS = 320;      // bucket-size  (320 == sqrt(1e5))
 

@@ -1,4 +1,4 @@
-#include "../../../template.cpp"
+#include "../../../boilerplate.cpp"
 
 struct Graph {
     int first, last, n;

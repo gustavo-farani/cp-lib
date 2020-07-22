@@ -1,4 +1,4 @@
-#include "../../template.cpp"
+#include "../../boilerplate.cpp"
 
 template<class S>
 array<vi, 2> manacher (const S& s) {

@@ -1,4 +1,4 @@
-#include "../../../template.cpp"
+#include "../../../boilerplate.cpp"
 
 struct FlowNetwork {
     vector<vector<ll>> c, f;

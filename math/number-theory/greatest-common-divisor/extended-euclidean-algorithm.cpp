@@ -1,4 +1,4 @@
-#include "../../../template.cpp"
+#include "../../../boilerplate.cpp"
 
 ll extendedEuclidean (ll a, ll b, ll &x, ll &y) {
 	ll r[] = {a, b};

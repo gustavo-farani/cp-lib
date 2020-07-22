@@ -1,4 +1,4 @@
-#include "../../../template.cpp"
+#include "../../../boilerplate.cpp"
 
 template<class S>
 vi sortCyclicShifts (const S& s) {

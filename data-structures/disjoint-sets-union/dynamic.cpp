@@ -1,4 +1,4 @@
-#include "../../template.cpp"
+#include "../../boilerplate.cpp"
 
 // same functionality as regular DSU,
 // but stores data in maps, instead of arrays

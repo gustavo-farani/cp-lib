@@ -1,4 +1,4 @@
-#include "../../../template.cpp"
+#include "../../../boilerplate.cpp"
 
 // sa: suffix array of string s
 // lcp[i]: length of the longest common prefix between

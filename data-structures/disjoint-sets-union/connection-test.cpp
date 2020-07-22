@@ -1,4 +1,4 @@
-#include "../../template.cpp"
+#include "../../boilerplate.cpp"
 
 struct DSU {        // union by rank
     vi par, rank;

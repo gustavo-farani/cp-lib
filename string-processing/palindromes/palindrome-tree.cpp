@@ -1,4 +1,4 @@
-#include "../../template.cpp"
+#include "../../boilerplate.cpp"
 
 // !TODO set the alphabet size
 const int SIGMA = 'z' - 'a' + 1;

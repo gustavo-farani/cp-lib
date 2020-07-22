@@ -1,4 +1,4 @@
-#include "../../template.cpp"
+#include "../../boilerplate.cpp"
 
 template<class T, class S>
 T maximumSum (const S& s) {

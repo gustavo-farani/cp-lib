@@ -1,4 +1,4 @@
-#include "../../template.cpp"
+#include "../../boilerplate.cpp"
 
 template<class T>
 struct RangeSum {   // Binary Indexed Tree for Online Range Sum Query

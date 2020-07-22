@@ -1,4 +1,4 @@
-#include "../../../template.cpp"
+#include "../../../boilerplate.cpp"
 
 struct RangeIncrement {
     vector<ll> tree, lazy;

@@ -1,4 +1,4 @@
-#include "../../../template.cpp"
+#include "../../../boilerplate.cpp"
 
 template<class S>
 ll countSubstrings (const S& s) {

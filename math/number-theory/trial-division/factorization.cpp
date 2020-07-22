@@ -1,4 +1,4 @@
-#include "../../../template.cpp"
+#include "../../../boilerplate.cpp"
 
 vector<ll> factorization (ll n) {
     vector<ll> ans;
