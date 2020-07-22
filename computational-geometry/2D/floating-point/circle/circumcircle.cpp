@@ -5,5 +5,5 @@
 Circle circumcircle (PT a, PT b, PT c) {
     PT u = b - a, v = c - a;
     PT w = perp(u*dot(v, v) - v*dot(u, u))/cross(u, v)/2.0;
-    return Circle{a + w, abs(w)};
+    return Circle(a + w, abs(w));
 }
