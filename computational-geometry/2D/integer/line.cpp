@@ -1,5 +1,6 @@
 #include "point.cpp"
 
+// unique representation of a line in the plane
 struct Line {
     ll a, b, c;
     Line (PT p, PT q) {  // credits to josecruz
@@ -11,5 +12,8 @@ struct Line {
     }
     bool contains (PT p) {
         return PT(a, b)*p == c;
+    }
+    bool operator< (const Line& o) {
+        return make_tuple(a, b, c) < make_tuple(o.a, o.b, o.c);
     }
 };
