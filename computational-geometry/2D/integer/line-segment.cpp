@@ -6,7 +6,7 @@ bool diag (PT a, PT b, PT p) {
     return l <= p.x && p.x <= r && d <= p.y && p.y <= u;
 }
 
-bool segmentsIntersect (PT a, PT b, PT c, PT d) {
+bool intersect (PT a, PT b, PT c, PT d) {
     PT u = b - a, v = d - c;
     ll ca = v % (a - c), cb = v % (b - c), cc = u % (c - a), cd = u % (d - a);
     return ca*cb < 0 && cc*cd < 0
