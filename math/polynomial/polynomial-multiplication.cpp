@@ -1,5 +1,11 @@
 #include "fast-fourier-transform.cpp"
 
+// a, b: polynomials with integer coefficients
+// a(x) = a[0] + a[1]*x + ... + a[a.size()-1]*x^(a.size()-1)
+// b(x) = b[0] + b[1]*x + ... + b[b.size()-1]*x^(b.size()-1)
+// return: coefficients of c(x) = a(x)*b(x)
+// complexity: O(N lg N),
+// N = degree of a + degree of b
 vector<ll> multiply (const vi& a, const vi& b) {
     vector<ll> c(a.size() + b.size() - 1);
     int n = 1;

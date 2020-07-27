@@ -1,3 +1,6 @@
+#include "../../boilerplate.cpp"
+
+// user-defined complex number
 struct CX {
     double x, y;
     CX (double x = 0.0, double y = 0.0) : x(x), y(y) {}
@@ -8,5 +11,3 @@ struct CX {
     void operator/= (double t) { x /= t, y /= t; }
     double real () { return x; }
 };
-
-CX polar (double t, double a) { return {t*cos(a), t*sin(a)}; }
