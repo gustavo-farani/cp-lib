@@ -1,6 +1,7 @@
-#include "fast-exponentiation.cpp"
+#include "../../exponentiation/generic.cpp"
 
-const int MOD = 1e9 + 7;  // TODO MOD value is defined on the problem statement
+// MOD must be a constant prime number
+const int MOD = 1e9 + 7;
 
 struct MB {
     int x;
