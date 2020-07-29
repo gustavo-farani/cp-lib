@@ -8,40 +8,51 @@ struct ExponentiationChain {
     int n;
     ExponentiationChain (int n) : n(n) {}
     // let this exponentiation chain to be of the form: a^n
+    // it tests if n fits a long long
+    bool smallExponent () {
+        return n <= 5;
+    }
+    // let this exponentiation chain to be of the form: a^n
     // return: n as a long long, if n is small enough
-    // throws: n as an ExponentiationChain itself, if n is too big
     // WARNING: the exponent n CAN'T become too small, because
     // for the recursion to be correct, it must hold: n >= lg(m)
     // thus, as soon as n fits in a long long, it MUST be returned immediataly
     ll getExponent () {
+        ll ans;
         switch (n) {
             case 1:
             case 2:
             case 3:
-                return n - 1;
+                ans = n - 1;
+            break;
             case 4:
-                return 9;
+                ans = 9;
+            break;
             case 5:
-                return 262144;
-            default:
-                throw ExponentiationChain(n - 1);
+                ans = 262144;
+            break;
         }
+        return ans;
     }
+    // let this exponentiation chain to be of the form: a^n
+    // return: n as an ExponentiationChain itself, if n is too big
+    ExponentiationChain next () { return n - 1; }
     // let this exponentiation chain to be of the form: a^n
     // return: a % m
     int getBase (int m) { return n % m; }
     // computes the result of this exponentiation chain, modulo m
-    // complexity: O(sqrt(m)*lg(m))
+    // complexity: O(lg(m)(T + lg(m))), where
+    // T = time complexity for each call to euler totient function
     int mod (int m) {
         if (m == 1) {
             return 0;
         } else {
             int a = getBase(m);
-            try {
+            if (smallExponent()) {
                 return modExp(a, getExponent(), m);
-            } catch (ExponentiationChain e) {
+            } else {
                 int k = phi(m);
-                return modExp(a, k + e.mod(k), m);
+                return modExp(a, k + next().mod(k), m);
             }
         }
     }
