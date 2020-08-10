@@ -15,10 +15,10 @@ struct RangeMaximumSum {
         }
     };
     vector<Node> tree;
-    RangeMaximumSum (int n, const vector<T>& v) : tree(n << 2) {
+    RangeMaximumSum (int n, vi& v) : tree(n << 2) {
         build(1, 0, n - 1, v);  // 0-based
     }
-    void build (int p, int l, int r, const vector<T>& v) {
+    void build (int p, int l, int r, vi& v) {
         if (l == r) {
             tree[p].leaf(v[l]);
         } else {
