@@ -1,4 +1,4 @@
-#include "../../exponentiation/generic.cpp"
+#include "../../fast-exponentiation/generic.cpp"
 
 // MOD must be a constant prime number
 const int MOD = 1e9 + 7;
