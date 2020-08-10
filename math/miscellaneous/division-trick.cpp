@@ -22,3 +22,5 @@ vector<ii> floorEqualRanges (int n) {
 vector<ii> ceilEqualRanges (int n) {
     return floorEqualRanges(n - 1);
 }
+
+// sample problem: https://codeforces.com/problemset/problem/830/C
