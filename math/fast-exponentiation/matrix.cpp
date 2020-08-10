@@ -1,10 +1,11 @@
-#include "../number-theory/modular-arithmetic/mod-base.cpp"
+#include "../../boilerplate.cpp"
 
+template<class T>
 struct Matrix {
     int n;     // order (number of rows and columns) of square matrix
-    vector<vector<MB>> a;
+    vector<vector<T>> a;
     // initializes this matrix as kI := identity matrix scaled by k
-    Matrix (int n, int k) : n(n), a(n, vector<MB>(n)) {
+    Matrix (int n, int k) : n(n), a(n, vector<T>(n)) {
         for (int i = 0; i < n; i++) a[i][i] = k;
     }
     // matrix-matrix multiplication
@@ -15,8 +16,8 @@ struct Matrix {
         return p;
     }
     // matrix-vector multiplication
-    vector<MB> operator* (const vector<MB>& v) {
-        vector<MB> u(n);
+    vector<T> operator* (const vector<T>& v) {
+        vector<T> u(n);
         for (int i = 0; i < n; i++) for (int k = 0; k < n; k++)
             u[i] += a[i][k]*v[k];
         return u;
@@ -34,5 +35,5 @@ struct Matrix {
         }
         return p;
     }
-    MB& operator() (int i, int j) { return a[i][j]; }  // manually inputing
+    T& operator() (int i, int j) { return a[i][j]; }  // manually inputing
 };

@@ -1,8 +1,9 @@
 #include "../../../boilerplate.cpp"
 
-vector<ll> factorization (ll n) {
-    vector<ll> ans;
-    for (ll d = 2; d*d <= n; d++) {
+template<class T>
+vector<T> factorization (T n) {
+    vector<T> ans;
+    for (T d = 2; d*d <= n; d++) {
         while (n % d == 0) {
             n /= d;
             ans.pb(d);

@@ -1,6 +1,7 @@
-int gcd (int a, int b) {
+template<class T>
+T gcd (T a, T b) {
     while (b != 0) {
-        int r = a % b;
+        T r = a % b;
         a = b;
         b = r;
     }
