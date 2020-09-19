@@ -1,9 +1,10 @@
 #include "../../../boilerplate.cpp"
 
 template<class S>
-vi sortSuffixes (const S& s) {  // O(n lg n)
+vi sortSuffixes (const S& s, vi& ord) {  // O(n lg n)
     int n = s.size(), m = 1;
-    vi sa(n), ord(n), cnt(n), aux(n);
+    ord.assign(n, 0);  // ord may come as an empty vector
+    vi sa(n), cnt(n), aux(n);
     iota(sa.begin(), sa.end(), 0);
     sort(sa.begin(), sa.end(), [&] (int i, int j) { return s[i] < s[j]; });
     for (int i = 1; i < n; i++) {
@@ -35,30 +36,7 @@ vi sortSuffixes (const S& s) {  // O(n lg n)
 }
 
 template<class S>
-vi sortSuffixes (const S& s) {  // O(n lg^2 n)
-    int n = s.size(), m = 1, h = 1;
-    vi sa(n), ord(n + 1, -1), aux(n + 1, -1);
-    iota(sa.begin(), sa.end(), 0);
-    sort(sa.begin(), sa.end(), [&] (int i, int j) { return s[i] < s[j]; });
-    ord[sa[0]] = 0;
-    for (int i = 1; i < n; i++) {
-        if (s[sa[i]] > s[sa[i - 1]]) m++;
-        ord[sa[i]] = m - 1;
-    }
-    auto comp = [&] (int i, int j) {
-        return mp(ord[i], ord[min(n, i + h)])
-        < mp(ord[j], ord[min(n, j + h)]);
-    };
-    while (h < n && m < n) {
-        sort(sa.begin(), sa.end(), comp);
-        m = 1;
-        aux[sa[0]] = 0;
-        for (int i = 1; i < n; i++) {
-            if (comp(sa[i - 1], sa[i])) m++;
-            aux[sa[i]] = m - 1;
-        }
-        ord.swap(aux);
-        h <<= 1;
-    }
-    return sa;
+vi sortSuffixes (const S& s) {
+    vi ord;
+    return sortSuffixes(s, ord);
 }
