@@ -2,44 +2,40 @@
 
 struct RangeIncrement {
     vector<ll> tree, lazy;
-    RangeIncrement (int n) :
-        tree(n << 2), lazy(n << 2)
-    {}
-    void refresh (int i, int l, int r) {
-        if (lazy[i] != 0) {
-            tree[i] += lazy[i] * (r - l + 1);
+    RangeIncrement (int n) : tree(n << 2), lazy(n << 2) {}
+    void refresh (int p, int l, int r) {
+        if (lazy[p] != 0) {
+            tree[p] += lazy[p]*(r - l + 1);
             if (l < r) {
-                int lc = i << 1, rc = (i << 1) + 1;
-                lazy[lc] += lazy[i];
-                lazy[rc] += lazy[i];
+                int lc = p << 1, rc = lc + 1;
+                lazy[lc] += lazy[p];
+                lazy[rc] += lazy[p];
             }
-            lazy[i] = 0;
+            lazy[p] = 0;
         }
     }
-    void update (int i, int l, int r, int ul, int ur, ll x) {
-        refresh(i, l, r);
+    void update (int p, int l, int r, int ul, int ur, ll x) {
+        refresh(p, l, r);
         if (r < ul || l > ur) {
             return;
         } else if (ul <= l && r <= ur) {
-            lazy[i] += x;
-            refresh(i, l, r);
+            lazy[p] += x;
+            refresh(p, l, r);
         } else {
-            int m = l + r >> 1;
-            int lc = i << 1, rc = (i << 1) + 1;
+            int m = l + r >> 1, lc = p << 1, rc = lc + 1;
             update(lc, l, m, ul, ur, x);
             update(rc, m + 1, r, ul, ur, x);
-            tree[i] = tree[lc] + tree[rc];
+            tree[p] = tree[lc] + tree[rc];
         }
     }
-    ll query (int i, int l, int r, int ql, int qr) {
-        refresh(i, l, r);
+    ll query (int p, int l, int r, int ql, int qr) {
+        refresh(p, l, r);
         if (r < ql || l > qr) {
             return 0;
         } else if (ql <= l && r <= qr) {
-            return tree[i];
+            return tree[p];
         } else {
-            int m = l + r >> 1;
-            int lc = i << 1, rc = (i << 1) + 1;
+            int m = l + r >> 1, lc = p << 1, rc = lc + 1;
             return query(lc, l, m, ql, qr) + query(rc, m + 1, r, ql, qr);
         }
     }
