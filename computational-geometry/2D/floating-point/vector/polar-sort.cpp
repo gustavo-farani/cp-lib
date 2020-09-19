@@ -16,7 +16,7 @@ struct PolarSort {
     }
     bool operator() (PT p, PT q) {
         PT u = p - o, v = q - o;
-        return make_tuple(half(u), 0, dot(u, u))
-        < make_tuple(half(v), sgn(cross(u, v)), dot(v, v));
+        return make_tuple(half(u), 0, sgn(dot(u, u) - dot(v, v)))
+        < make_tuple(half(v), sgn(cross(u, v)), 0);
     }
 };

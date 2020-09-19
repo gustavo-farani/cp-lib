@@ -17,7 +17,7 @@ bool intersect (PT a, PT b, PT c, PT d) {
 // computes intersection points between line segments a-b and c-d
 vector<PT> intersection (PT a, PT b, PT c, PT d) {
     vector<PT> v;
-    double oa = orient(c, d, a), ob = orient(c, d, b),
+    ld oa = orient(c, d, a), ob = orient(c, d, b),
     oc = orient(a, b, c), od = orient(a, b, d);
     if (sgn(oa)*sgn(ob) < 0 && sgn(oc)*sgn(od) < 0) {
         v.pb((a*ob - b*oa)/(ob - oa));

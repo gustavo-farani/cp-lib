@@ -6,4 +6,4 @@ Line Line::perpThrough (PT p) {
     return Line(u, cross(u, p));
 }
 PT Line::proj (PT p) { return p - perp(v)*side(p)/dot(v, v); }
-PT Line::reflect (PT p) { return p - perp(v)*side(p)*2.0/dot(v, v); }
+PT Line::reflect (PT p) { return p - perp(v)*side(p)*2.0L/dot(v, v); }

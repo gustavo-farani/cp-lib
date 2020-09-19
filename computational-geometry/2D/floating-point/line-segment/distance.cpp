@@ -2,7 +2,7 @@
 #include "../vector/comparison.cpp"
 
 // distance to line segment a-b from point p
-double dist (PT a, PT b, PT p) {
+ld dist (PT a, PT b, PT p) {
     if (!(a == b)) {
         Line l(a, b);
         LineSort compProj{l};
@@ -12,7 +12,7 @@ double dist (PT a, PT b, PT p) {
 }
 
 // distance between line segments a-b and c-d
-double dist (PT a, PT b, PT c, PT d) {
+ld dist (PT a, PT b, PT c, PT d) {
     if (sgn(orient(c, d, a))*sgn(orient(c, d, b)) < 0
     && sgn(orient(a, b, c))*sgn(orient(a, b, d)) < 0) {
         return 0;

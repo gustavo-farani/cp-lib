@@ -6,7 +6,7 @@
 // assumes p is out of the region covered by this circle
 pair<PT, PT> Circle::pointsOfTangency (PT p) {
     PT d = p - c;
-    double d2 = dot(d, d), h2 = d2 - r*r;
+    ld d2 = dot(d, d), h2 = d2 - r*r;
     PT u = (d*r - perp(d)*sqrt(h2))/d2;
     PT v = (d*r + perp(d)*sqrt(h2))/d2;
     return {c + u*r, c + v*r};
@@ -17,7 +17,7 @@ pair<PT, PT> Circle::pointsOfTangency (PT p) {
 // assumes the circle regions do not overlap
 pair<PT, PT> Circle::innerPointsOfTangency (Circle o) {
     PT d = o.c - c;
-    double dr = r + o.r, d2 = dot(d, d), h2 = d2 - dr*dr;
+    ld dr = r + o.r, d2 = dot(d, d), h2 = d2 - dr*dr;
     PT u = (d*dr - perp(d)*sqrt(h2))/d2;
     PT v = (d*dr + perp(d)*sqrt(h2))/d2;
     return {c + u*r, c + v*r};
@@ -28,7 +28,7 @@ pair<PT, PT> Circle::innerPointsOfTangency (Circle o) {
 // assumes the circle regions do not overlap
 pair<PT, PT> Circle::outerPointsOfTangency (Circle o) {
     PT d = o.c - c;
-    double dr = r - o.r, d2 = dot(d, d), h2 = d2 - dr*dr;
+    ld dr = r - o.r, d2 = dot(d, d), h2 = d2 - dr*dr;
     PT u = (d*dr - perp(d)*sqrt(h2))/d2;
     PT v = (d*dr + perp(d)*sqrt(h2))/d2;
     return {c + u*r, c + v*r};

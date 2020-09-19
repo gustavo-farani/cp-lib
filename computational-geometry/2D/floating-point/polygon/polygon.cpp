@@ -1,6 +1,4 @@
 #include "../vector/point.cpp"
-#include "../line/line.cpp"
-#include "../circle/circle.cpp"
 
 struct Polygon {
     int sides;
@@ -10,8 +8,8 @@ struct Polygon {
     // convexity.cpp
     int convex();
     // area.cpp
-    double shoelace();
-    double area();
+    ld shoelace();
+    ld area();
     bool ccw();
     bool cw();
     // cut.cpp

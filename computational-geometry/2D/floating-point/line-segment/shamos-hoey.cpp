@@ -2,8 +2,8 @@
 
 // determines the y-position of line segment a, b
 // with relation to the vertical sweep-line at x
-double ord (PT a, PT b, double x) {
-    double dx = b.x - a.x, ans = a.y;
+ld ord (PT a, PT b, ld x) {
+    ld dx = b.x - a.x, ans = a.y;
     if (sgn(dx) != 0) ans += (b.y - a.y)/dx*(x - a.x);
     return ans;
 }
@@ -12,7 +12,7 @@ double ord (PT a, PT b, double x) {
 // saving their indices into ans
 // complexity: O(N lg N)
 bool intersect (vector<pair<PT, PT>>& v, ii ans) {
-    vector<tuple<double, bool, double, int>> e;
+    vector<tuple<ld, bool, ld, int>> e;
     for (int i = 0; i < v.size(); i++) {
         if (v[i].second < v[i].first) swap(v[i].first, v[i].second);
         e.emplace_back(v[i].first.x, false, v[i].first.y, i);
@@ -20,7 +20,7 @@ bool intersect (vector<pair<PT, PT>>& v, ii ans) {
     }
     sort(e.begin(), e.end());
     set<int, function<bool(int, int)>> s([&] (int i, int j) {
-        double x = max(v[i].first.x, v[j].first.x);
+        ld x = max(v[i].first.x, v[j].first.x);
         return sgn(ord(v[i].first, v[i].second, x)
         - ord(v[j].first, v[j].second, x)) < 0;
     });

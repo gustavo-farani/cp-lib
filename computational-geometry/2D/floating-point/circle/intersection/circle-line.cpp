@@ -4,7 +4,7 @@
 
 // counts the number of intersection points between a line and a circumference
 int intersect (Circle g, Line l) {
-    double aux = l.side(g.c);
+    ld aux = l.side(g.c);
     return 1 + sgn(g.r*g.r - aux*aux/dot(l.v, l.v));
 }
 
@@ -12,7 +12,7 @@ int intersect (Circle g, Line l) {
 vector<PT> intersection (Circle g, Line l) {
     vector<PT> ans;
     PT p = l.proj(g.c), a = g.c - p;
-    double d2 = g.r*g.r - dot(a, a);
+    ld d2 = g.r*g.r - dot(a, a);
     int aux = sgn(d2);
     if (aux == 0) {
         ans.pb(p);

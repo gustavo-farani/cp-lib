@@ -1,14 +1,14 @@
 #include "polygon.cpp"
 
-double Polygon::shoelace () {
-    double sum = 0;
+ld Polygon::shoelace () {
+    ld sum = 0;
     for (int i = 0; i < sides; i++) sum += cross(p[i], p[next(i)]);
     return sum;
 }
 
-double area (PT a, PT b, PT c) { return abs(cross(b - a, c - a))/2.0; }
+ld area (PT a, PT b, PT c) { return abs(cross(b - a, c - a))/2.0L; }
 // area of a polygon (it may be concave)
-double Polygon::area () { return abs(shoelace())/2.0; }
+ld Polygon::area () { return abs(shoelace())/2.0L; }
 
 // whether vertices are listed counterclockwise
 bool Polygon::ccw () { return sgn(shoelace()) > 0; }

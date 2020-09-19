@@ -1,6 +1,6 @@
 #include "cut.cpp"
 #include "../line-segment/distance.cpp"
-#include "../line/bissector.cpp"
+#include "../line/bisector.cpp"
 #include "../line/move.cpp"
 
 // largest circle contained inside a CONVEX polygon
@@ -15,7 +15,7 @@ Circle Polygon::largestCircle () {
             Line your = Line(p[j], p[next(j)]);
             if (sgn(cross(my.v, your.v)) == 0) {
                 Line l = my;
-                l.translate((your.proj(p[i]) - p[i])/2.0);
+                l.translate((your.proj(p[i]) - p[i])/2.0L);
                 if (sgn(l.side(p[i])) < 0 || sgn(l.side(p[next(i)])) < 0) {
                     l.reverse();
                 }
@@ -34,7 +34,7 @@ Circle Polygon::largestCircle () {
             }
         }
         for (int j = 0; j < pol.sides; j++) {
-            double aux = dist(p[i], p[next(i)], pol.p[j]);
+            ld aux = dist(p[i], p[next(i)], pol.p[j]);
             if (aux > ans.r) {
                 ans.r = aux;
                 ans.c = pol.p[j];
