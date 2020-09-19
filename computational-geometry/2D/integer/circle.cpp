@@ -1,13 +1,15 @@
-#include "point.cpp"
+#include "../../../boilerplate.cpp"
 
 struct Circle {
-    PT c;
-    ll r;
-    Circle (PT c, ll r) : c(c), r(r) {}
-    bool contains (PT p) { return norm(p - c) <= r*r; }
+    ll x, y, r;
+    Circle (ll x = 0, ll y = 0, ll r = 0) : x(x), y(y), r(r) {}
+    bool contains (ll px, ll py) {
+        ll d2 = (x - px)*(x - px) + (y - py)*(y - py);
+        return d2 <= r*r;
+    }
 };
 
 bool intersect (Circle a, Circle b) {
-    PT v = b.c - a.c;
-    return norm(v) <= a.r*a.r + (a.r*b.r << 1) + b.r*b.r;
+    ll d2 = (a.x - b.x)*(a.x - b.x) + (a.y - b.y)*(a.y - b.y);
+    return d2 <= a.r*a.r + (a.r*b.r << 1) + b.r*b.r;
 }
