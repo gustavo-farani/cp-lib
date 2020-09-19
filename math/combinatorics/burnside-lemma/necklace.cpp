@@ -1,5 +1,5 @@
 #include "../../number-theory/sieve-of-eratosthenes/totient-function.cpp"
-#include "../../number-theory/modular-arithmetic/mod-base.cpp"
+#include "../mod-base.cpp"
 #include "../../number-theory/divisors/find-divisors.cpp"
 
 Totient phi(1e6);

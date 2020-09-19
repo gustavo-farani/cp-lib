@@ -1,4 +1,4 @@
-#include "../../number-theory/modular-arithmetic/mod-base.cpp"
+#include "../mod-base.cpp"
 
 // implements Pòlya Enumeration Theorem's formula
 // n: number of positions in each permutation
