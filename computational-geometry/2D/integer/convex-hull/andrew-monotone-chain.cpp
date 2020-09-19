@@ -17,14 +17,14 @@ vector<PT> convexHull (const vector<PT>& v) {
         vector<PT> h;
         int i = 0, j = 1;
         for (int k = 0; k < n; k++) {
-            while (i > j && (v[k] - h[i - 2]) % (h[i - 1] - h[i - 2]) >= 0) {
+            while (i > j && orient(h[i - 2], v[k], h[i - 1]) >= 0) {
                 h.resize(--i);
             }
             h.resize(++i, v[k]);
         }
         j += --i;
         for (int k = n; k--;) {  // same loop as before (copy and paste it!)
-            while (i > j && (v[k] - h[i - 2]) % (h[i - 1] - h[i - 2]) >= 0) {
+            while (i > j && orient(h[i - 2], v[k], h[i - 1]) >= 0) {
                 h.resize(--i);
             }
             h.resize(++i, v[k]);
