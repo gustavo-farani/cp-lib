@@ -1,11 +1,11 @@
 #include "../../boilerplate.cpp"
 
-template <typename T>
+template<class T>
 struct MedianHeap {
     priority_queue<T> left; // Max Heap
-    min_heap<T> right; // Min Heap
+    priority_queue<T, vector<T>, greater<T>> right; // Min Heap
     int size () { return left.size() + right.size(); }
-    void push (T x) {
+    void push (const T& x) {
         if (size() == 0) {  // empty
             left.push(x);
         } else if (size() & 1) {   // odd
