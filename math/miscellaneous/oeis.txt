@@ -1,0 +1,7 @@
+https://oeis.org/A006879  | Primes with n digits.
+https://oeis.org/A066150  | Maximal number of divisors of any n-digit number.
+https://oeis.org/A002110  | Product of first n primes.
+https://oeis.org/A007755  | Euler Totient Function iterations.
+https://oeis.org/A033948  | Numbers that have a primitive root.
+https://oeis.org/A046144  | Number of primitive roots modulo n.
+https://oeis.org/A000668  | Mersenne primes (of form 2^p - 1 where p is a prime).
