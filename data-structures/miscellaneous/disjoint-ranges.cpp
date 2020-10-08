@@ -13,15 +13,15 @@ struct DisjointRanges {
                 it->second.first = r;
             }
         }
-        auto first = s.lower_bound(l);
+        auto init = s.lower_bound(l);
         if (first != s.begin()) {
-            auto it = prev(first);
+            auto it = prev(init);
             if (it->second.first >= l) {
                 bye.pb({l, it->second.first, it->second.second});
                 it->second.first = l - 1;
             }
         }
-        for (auto it = first; it != last; it = s.erase(it)) {
+        for (auto it = init; it != last; it = s.erase(it)) {
             bye.pb({it->first, it->second.first, it->second.second});
         }
         s.emplace_hint(last, l, make_pair(r, x));
