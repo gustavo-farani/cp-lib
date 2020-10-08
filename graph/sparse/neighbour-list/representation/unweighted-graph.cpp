@@ -3,10 +3,10 @@
 struct Graph {  // unweighted graph
     int first, last, n;
     vector<vi> adj;
-    // base == 0: vertices indices in range [0, n)
-    // base == 1: vertices indices in range [1, n]
-    Graph (int n, bool base) :
-        first(base), last(n + base), n(n), adj(last)
+    // b == 0: vertices indices in range [0, n)
+    // b == 1: vertices indices in range [1, n]
+    Graph (int n, bool b) :
+        first(b), last(n + b), n(n), adj(last)
     {}
     void addEdge (int u, int v) {
         adj[u].pb(v);
