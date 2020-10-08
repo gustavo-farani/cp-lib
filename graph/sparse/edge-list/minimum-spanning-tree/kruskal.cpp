@@ -1,21 +1,24 @@
 #include "../../../../data-structures/disjoint-sets-union/connection-test.cpp"
-#include "../representation/graph.cpp"
-using namespace std;
+#include "../representation/weighted-edge.cpp"
 
-// g: possibly not connected weighted graph in edge list representation
-// return: indices of g's edges which compose a MST, if g is connected
-// raises exception if g is disconnected
-vi minimumSpanningTree (const Graph<WE>& g) {
-    vi mst, v(g.e.size());
-    iota(v.begin(), v.end(), 0);
-    sort(v.begin(), v.end(), [&] (int i, int j) { return g.e[i] < g.e[j]; });
-    DSU dsu(g.last);
-    for (int z : v) {
-        if (!dsu.connected(g.e[z].from, g.e[z].to)) {
-            mst.pb(z);
-            dsu.merge(g.e[z].from, g.e[z].to);
+// edges: list of edges of a weighted graph
+// n: number of vertices in the graph
+// b: base indexation for vertices indices
+// return: sum of edge weights of minimum spanning tree
+// throw an exception if graph is disconnected
+ll minimumSpanningTree (vector<Edge>& edges, int n, bool b) {
+    ll sum = 0;
+    int cnt = 0;
+    sort(edges.begin(), edges.end());
+    DSU dsu(n + b);
+    for (Edge& e : edges) {
+        if (!dsu.connected(e.from, e.to)) {
+            // TODO edge e is part of the MST
+            sum += e.weight;
+            cnt++;
+            dsu.merge(e.from, e.to);
         }
     }
-    if (mst.size() == g.n - 1) return mst;
+    if (cnt == n - 1) return sum;
     else throw -1;
 }

@@ -1,31 +1,35 @@
 #include "../representation/graph.cpp"
+#include "../representation/weighted-edge.cpp"
 
 // g: possibly not connected weighted graph
 // in edge list representation
-// return: indices of g's edges which compose a MST, 
+// return: pointers to g's edges which compose a MST, 
 // if g is connected
-// raises exception if the graph is disconnected
-vi minimumSpanningTree (const Graph<WE>& g) {
-    vi mst;
+// throws an exception if the graph is disconnected
+vector<Edge*> minimumSpanningTree (const Graph& g) {
+    vector<Edge*> mst;
     vector<bool> taken(g.last);
-    priority_queue<int, vi, function<bool(int, int)>>
-    pq([&] (int i, int j) { return g.e[j] < g.e[i]; });
+    priority_queue<Edge*, vector<Edge*>, function<bool(Edge*, Edge*)>>
+    pq([&] (Edge* e1, Edge* e2) { return *e2 < *e1; });
     int u = g.first, v;
     while (mst.size() < g.n - 1) {
         taken[u] = true;
-        for (int z : g.adj[u]) {
-            int v = u ^ g.e[z].from ^ g.e[z].to;
-            if (!taken[v]) pq.push(z);
+        for (auto e : g.adj[u]) {
+            v = e->other(u);
+            if (!taken[v]) pq.push(e);
         }
-        int z;
+        Edge* e;
         do {
-            if (pq.empty()) throw -1;  // disconnected
-            else {
-                z = pq.top(), pq.pop();
-                u = g.e[z].from, v = g.e[z].to;
+            if (pq.empty()) {
+                throw -1;  // disconnected
+            } else {
+                e = pq.top();
+                pq.pop();
+                u = e->from;
+                v = e->to;
             }
         } while (taken[u] && taken[v]);
-        mst.pb(z);
+        mst.pb(e);
         if (taken[u]) u = v;
     }
     return mst;
