@@ -27,7 +27,7 @@ struct HLD {
                     dfs[0](v);
                     sz[u] += sz[v];
                     auto jt = g.adj[u].begin();
-                    if (jt->second == par[u] || sz[v] > sz[jt->second]) {
+                    if (jt->se == par[u] || sz[v] > sz[jt->se]) {
                         iter_swap(it, jt);
                     }
                 }
@@ -38,7 +38,7 @@ struct HLD {
         dfs[1] = [&] (int u) {
             pre[u] = ++t;
             for (auto it = g.adj[u].begin(); it != g.adj[u].end(); it++) {
-                int v = it->second;
+                int v = it->se;
                 if (v != par[u]) {
                     top[v] = it == g.adj[u].begin() ? top[u] : v;
                     dfs[1](v);

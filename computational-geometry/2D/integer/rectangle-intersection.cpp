@@ -3,12 +3,12 @@
 struct Rect {
     ii x, y;
     Rect (int l, int r, int d, int u) : x(l, r), y(d, u) {}
-    bool empty () { return x.first > x.second || y.first > y.second; }
+    bool empty () { return x.fi > x.se || y.fi > y.se; }
 };
 
 ii intervalIntersection (ii a, ii b) {
-    if (b.first < a.first) swap(a, b);
-    return {b.first, min(a.second, b.second)};
+    if (b.fi < a.fi) swap(a, b);
+    return {b.fi, min(a.se, b.se)};
 }
 
 Rect rectanglesIntersection (Rect a, Rect b) {

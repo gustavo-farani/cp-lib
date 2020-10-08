@@ -5,13 +5,13 @@ struct RangeAssign {
     vector<pair<bool, int>> lazy;
     RangeAssign (int n) : tree(n << 2), lazy(n << 2) {}
     void refresh (int p, int l, int r) {
-        if (lazy[p].first) {
-            tree[p] = (ll) (r - l + 1)*lazy[p].second;
+        if (lazy[p].fi) {
+            tree[p] = (ll) (r - l + 1)*lazy[p].se;
             if (l < r) {
                 int lc = p << 1, rc = lc + 1;
                 lazy[lc] = lazy[rc] = lazy[p];
             }
-            lazy[p].first = false;
+            lazy[p].fi = false;
         }
     }
     void update (int p, int l, int r, int ul, int ur, int x) {

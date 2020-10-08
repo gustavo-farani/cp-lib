@@ -11,19 +11,19 @@ struct DSU {
     DSU (int n) : n(n) {}
     T find (T u) {
         auto it = par.lower_bound(u);
-        if (it == par.end() || it->first != u) {
+        if (it == par.end() || it->fi != u) {
             it = par.emplace_hint(it, u, u);
-        } else if (it->second != u) {
-            it->second = find(it->second);
+        } else if (it->se != u) {
+            it->se = find(it->se);
         }
-        return it->second;
+        return it->se;
     }
     int& size (T u) {
         auto it = sz.lower_bound(u);
-        if (it == sz.end() || it->first != u) {
+        if (it == sz.end() || it->fi != u) {
             it = sz.emplace_hint(it, u, 1);
         }
-        return it->second;
+        return it->se;
     }
     void merge (T u, T v) {
         u = find(u), v = find(v);

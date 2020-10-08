@@ -16,13 +16,13 @@ ld ord (pair<PT, PT>& s, ld x) {
 bool intersect (vector<pair<PT, PT>>& v, ii& ans) {
     vector<tuple<ld, bool, ld, int>> e;
     for (int i = 0; i < v.size(); i++) {
-        if (v[i].second < v[i].first) swap(v[i].first, v[i].second);
-        e.emplace_back(v[i].first.x, false, v[i].first.y, i);
-        e.emplace_back(v[i].second.x, true, v[i].second.y, i);
+        if (v[i].se < v[i].fi) swap(v[i].fi, v[i].se);
+        e.emplace_back(v[i].fi.x, false, v[i].fi.y, i);
+        e.emplace_back(v[i].se.x, true, v[i].se.y, i);
     }
     sort(e.begin(), e.end());
     set<int, function<bool(int, int)>> s([&] (int i, int j) {
-        ld x = max(v[i].first.x, v[j].first.x);
+        ld x = max(v[i].fi.x, v[j].fi.x);
         return sgn(ord(v[i], x) - ord(v[j], x)) < 0;
     });
     for (auto [x, close, y, i] : e) {

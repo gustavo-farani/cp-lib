@@ -28,7 +28,7 @@ int discreteLog (int k, int a, int b, int m) {
             cur = (ll) cur*giant % m;
             auto it = meet.find(cur);
             if (it != meet.end()) {
-                return n*p - it->second + cnt;
+                return n*p - it->se + cnt;
             }
         }
         throw -1;

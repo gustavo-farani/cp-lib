@@ -13,7 +13,7 @@ struct Grid {
         c[ui][uj] = k;
         sz[k]++;
         for (const ii &d : windrose) {
-            int vi = ui + d.first, vj = uj + d.second;
+            int vi = ui + d.fi, vj = uj + d.se;
             if (g[vi][vj] && c[vi][vj] == -1) dfs(vi, vj, k);
         }
     }

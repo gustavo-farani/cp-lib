@@ -9,13 +9,13 @@ struct PatternMatching {
         n(sa.size()), v(v), sa(sa)
     {}
     int comp (int k, const string& s) {
-        auto mis = mismatch(s.begin(), s.end(), v[sa[k].first].begin() + sa[k].second);
-        if (mis.first == s.end()) {
+        auto mis = mismatch(s.begin(), s.end(), v[sa[k].fi].begin() + sa[k].se);
+        if (mis.fi == s.end()) {
             return 0;
-        } else if (mis.second == v[sa[k].first].end()) {
+        } else if (mis.se == v[sa[k].fi].end()) {
             return -1;
         } else {
-            return *mis.second - *mis.first;
+            return *mis.se - *mis.fi;
         }
     }
     ii match (const string& s) {

@@ -53,11 +53,11 @@ vector<T> solve (vector<Q>& q, const vector<pair<T, U>>& e) {
         int cur = 0;
         for (auto [s, qry] : p) {
             if (s.finished()) {
-                ans[s.id] = e[s.result()].first;
+                ans[s.id] = e[s.result()].fi;
             } else {
                 while (cur < e.size() && cur <= s.m) {
                     // TODO update data structure passing
-                    // e[cur].second as parameters
+                    // e[cur].se as parameters
                     cur++;
                 }
                 // TODO query data structure passing

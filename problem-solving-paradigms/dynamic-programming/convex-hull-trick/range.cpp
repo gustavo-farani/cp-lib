@@ -10,8 +10,8 @@ struct Node {
         merge(l.h.begin(), l.h.end(), r.h.begin(), r.h.end(), in.begin());
         int n = 0;
         for (auto& it : in) {
-            while (n > 1 && orient(h[n - 2].first,
-            h[n - 1].first, it.first) >= 0) {
+            while (n > 1 && orient(h[n - 2].fi,
+            h[n - 1].fi, it.fi) >= 0) {
                 h.resize(--n);
             }
             h.resize(++n, it);
@@ -24,10 +24,10 @@ struct Node {
             i = 0;
         } else {
             i = search(0, h.size() - 2, [&] (int i) {
-                return q*(h[i].first - h[i + 1].first) >= 0;
+                return q*(h[i].fi - h[i + 1].fi) >= 0;
             });
         }
-        return {h[i].first*q, h[i].second};
+        return {h[i].fi*q, h[i].se};
     }
 };
 

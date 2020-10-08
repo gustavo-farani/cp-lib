@@ -21,27 +21,27 @@ vector<ii> sortSuffixes (vector<S>& v) {
         }
     }
     sort(sa.begin(), sa.end(), [&] (const ii& p, const ii& q) {
-        return v[p.first][p.second] < v[q.first][q.second];
+        return v[p.fi][p.se] < v[q.fi][q.se];
     });
-    ord[sa[0].first][sa[0].second] = 0;
+    ord[sa[0].fi][sa[0].se] = 0;
     for (int i = 1; i < sa.size(); i++) {
-        if (v[sa[i - 1].first][sa[i - 1].second]
-        < v[sa[i].first][sa[i].second]) m++;
-        ord[sa[i].first][sa[i].second] = m - 1;
+        if (v[sa[i - 1].fi][sa[i - 1].se]
+        < v[sa[i].fi][sa[i].se]) m++;
+        ord[sa[i].fi][sa[i].se] = m - 1;
     }
     auto comp = [&] (const ii& p, const ii& q) {
-        return ii(ord[p.first][p.second],
-        ord[p.first][min(int(v[p.first].size()), p.second + h)])
-        < ii(ord[q.first][q.second],
-        ord[q.first][min(int(v[q.first].size()), q.second + h)]);
+        return ii(ord[p.fi][p.se],
+        ord[p.fi][min(int(v[p.fi].size()), p.se + h)])
+        < ii(ord[q.fi][q.se],
+        ord[q.fi][min(int(v[q.fi].size()), q.se + h)]);
     };
     while (h < lim) {
         sort(sa.begin(), sa.end(), comp);
         m = 1;
-        ord[sa[0].first][sa[0].second] = 0;
+        ord[sa[0].fi][sa[0].se] = 0;
         for (int i = 1; i < sa.size(); i++) {
             if (comp(sa[i - 1], sa[i])) m++;
-            aux[sa[i].first][sa[i].second] = m - 1;
+            aux[sa[i].fi][sa[i].se] = m - 1;
         }
         ord.swap(aux);
         h <<= 1;

@@ -13,10 +13,10 @@ string longestCommonSubstring (const string& s, const string& t) {
     // ignore i == 0: there will be the suffix ('$' + t)
     for (int k = 1; k < m - 1; k++) {
         int i = sa[k], j = sa[k + 1];
-        if (who(i) ^ who(j) && lcp[k] > ans.second) {
-            ans.second = lcp[k];
-            ans.first = who(i) ? j : i;
+        if (who(i) ^ who(j) && lcp[k] > ans.se) {
+            ans.se = lcp[k];
+            ans.fi = who(i) ? j : i;
         }
     }
-    return s.substr(ans.first, ans.second);
+    return s.substr(ans.fi, ans.se);
 }

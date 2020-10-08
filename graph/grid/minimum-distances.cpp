@@ -20,7 +20,7 @@ struct Grid {
             auto [ui, uj] = q.front();  // C++ 17 only
             q.pop();
             for (const ii &d : windrose) {
-                int vi = ui + d.first, vj = uj + d.second;
+                int vi = ui + d.fi, vj = uj + d.se;
                 if (g[vi][vj] && dist[vi][vj] == INT_MAX) {
                     dist[vi][vj] = 1 + dist[ui][uj];
                     q.emplace(vi, vj);
@@ -41,7 +41,7 @@ struct Grid {
             auto [ui, uj] = q.front();  // C++ 17 only
             q.pop();
             for (const ii &d : windrose) {
-                int vi = ui + d.first, vj = uj + d.second;
+                int vi = ui + d.fi, vj = uj + d.se;
                 if (g[vi][vj] && dist[vi][vj] == INT_MAX) {
                     dist[vi][vj] = 1 + dist[ui][uj];
                     q.emplace(vi, vj);

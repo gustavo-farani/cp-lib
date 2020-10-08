@@ -8,21 +8,21 @@ struct DisjointRanges {
         auto last = s.upper_bound(r);
         if (last != s.begin()) {
             auto it = prev(last);
-            if (it->second.first > r) {
-                last = s.emplace_hint(last, r + 1, it->second);
-                it->second.first = r;
+            if (it->se.fi > r) {
+                last = s.emplace_hint(last, r + 1, it->se);
+                it->se.fi = r;
             }
         }
         auto init = s.lower_bound(l);
         if (first != s.begin()) {
             auto it = prev(init);
-            if (it->second.first >= l) {
-                bye.pb({l, it->second.first, it->second.second});
-                it->second.first = l - 1;
+            if (it->se.fi >= l) {
+                bye.pb({l, it->se.fi, it->se.se});
+                it->se.fi = l - 1;
             }
         }
         for (auto it = init; it != last; it = s.erase(it)) {
-            bye.pb({it->first, it->second.first, it->second.second});
+            bye.pb({it->fi, it->se.fi, it->se.se});
         }
         s.emplace_hint(last, l, make_pair(r, x));
         return bye;

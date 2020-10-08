@@ -9,12 +9,12 @@ struct PatternMatching {
     PatternMatching (S&& t) : n(t.size()), t(t), sa(sortSuffixes(t)) {}
     int comp (int k, const S& s) {
         auto mis = mismatch(s.begin(), s.end(), t.begin() + sa[k]);
-        if (mis.first == s.end()) {
+        if (mis.fi == s.end()) {
             return 0;
-        } else if (mis.second == t.end()) {
+        } else if (mis.se == t.end()) {
             return -1;
         } else {
-            return *mis.second - *mis.first;
+            return *mis.se - *mis.fi;
         }
     };
     // returns start positions for matchings of s in t

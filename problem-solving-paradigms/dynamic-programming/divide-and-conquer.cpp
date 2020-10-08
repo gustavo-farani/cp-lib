@@ -16,15 +16,15 @@ void solve (int l, int r, int pl, int pr) {
     int m = l + r >> 1;
     pair<ll, int> opt;
     // NOTE: objective function is maximized
-    opt.first = numeric_limits<ll>::min();
+    opt.fi = numeric_limits<ll>::min();
     for (int i = pl; i <= pr; i++) {
         if (i > m) break;
         // NOTE: objective function is maximized
         opt = max(opt, {dp[pre][i - 1] + cost(i, m), i});
     }
-    dp[cur][m] = opt.first;
-    solve(l, m - 1, pl, opt.second);
-    solve(m + 1, r, opt.second, pr);
+    dp[cur][m] = opt.fi;
+    solve(l, m - 1, pl, opt.se);
+    solve(m + 1, r, opt.se, pr);
 }
 
 // n: array size
