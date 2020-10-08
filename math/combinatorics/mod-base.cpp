@@ -5,7 +5,8 @@ const int MOD = 1e9 + 7;
 
 struct MB {
     int x;
-    MB (int x = 0) : x(x) {}  // implicit conversion in assignment statements
+    // implicit conversion in assignment statements
+    MB (int x = 0) : x(x < 0 ? x + MOD : x) {}
     MB operator+ (MB o) {
         int y = x + o.x;
         return y >= MOD ? y - MOD : y;
