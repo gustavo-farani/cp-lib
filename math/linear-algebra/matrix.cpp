@@ -1,7 +1,4 @@
 #include "../../boilerplate.cpp"
-
-const ld EPS = 1e-22L;
-int sgn (ld t) { return abs(t) < EPS ? 0 : (t > 0) - (t < 0); }
  
 typedef valarray<ld> VR;
  

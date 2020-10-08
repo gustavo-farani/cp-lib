@@ -1,8 +1,5 @@
 #include "../../../../boilerplate.cpp"
 
-const ld EPS = 1e-22L;
-int sgn (ld t) { return abs(t) < EPS ? 0 : (t > 0) - (t < 0); }
-
 struct PT {
     ld x, y;
     PT (ld x = 0.0L, ld y = 0.0L) : x(x), y(y) {}
