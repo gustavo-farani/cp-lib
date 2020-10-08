@@ -4,7 +4,7 @@
 template<class T, bool B>
 struct RangeSum {
     BIT<T> v;
-    RangeIncrement (int n) : v(n) {}
+    RangeSum (int n) : v(n) {}
     // position increment
     void add (int i, T x) { v.update(i + !B, x); }
     // range sum
