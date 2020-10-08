@@ -7,7 +7,9 @@ bool onSegment (PT a, PT b, PT p) {
 }
 
 // tests if line segments a-b and c-d intersect
-bool intersect (PT a, PT b, PT c, PT d) {
+bool intersect (pair<PT, PT>& s, pair<PT, PT>& t) {
+    auto [a, b] = s;
+    auto [c, d] = t;
     return sgn(orient(c, d, a))*sgn(orient(c, d, b)) < 0
     && sgn(orient(a, b, c))*sgn(orient(a, b, d)) < 0
     || onSegment(c, d, a) || onSegment(c, d, b)
@@ -15,7 +17,9 @@ bool intersect (PT a, PT b, PT c, PT d) {
 }
 
 // computes intersection points between line segments a-b and c-d
-vector<PT> intersection (PT a, PT b, PT c, PT d) {
+vector<PT> intersection (pair<PT, PT>& s, pair<PT, PT>& t) {
+    auto [a, b] = s;
+    auto [c, d] = t;
     vector<PT> v;
     ld oa = orient(c, d, a), ob = orient(c, d, b),
     oc = orient(a, b, c), od = orient(a, b, d);
