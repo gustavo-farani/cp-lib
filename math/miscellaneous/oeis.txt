@@ -1,4 +1,4 @@
-https://oeis.org/A006879  | Primes with n digits.
+https://oeis.org/A006880  | Primes < 10^n.
 https://oeis.org/A066150  | Maximal number of divisors of any n-digit number.
 https://oeis.org/A002110  | Product of first n primes.
 https://oeis.org/A007755  | Euler Totient Function iterations.
