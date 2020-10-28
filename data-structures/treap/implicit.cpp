@@ -3,7 +3,7 @@
 uniform_int_distribution<int> prio;
 
 template<class T>
-struct List {
+struct Rope {
     struct Node {
         int y;
         Node *l, *r;
@@ -118,7 +118,7 @@ struct List {
     }
 
     Node* root;
-    List () : root(nullptr) {}
+    Rope () : root(nullptr) {}
 
     void insert (int i, const T& x) {
         Node *head, *tail;
