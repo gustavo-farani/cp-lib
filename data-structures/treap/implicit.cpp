@@ -1,49 +1,72 @@
 #include "../../boilerplate.cpp"
 
-mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
-uniform_int_distribution<int> uni;
+uniform_int_distribution<int> prio;
 
 template<class T>
 struct List {
     struct Node {
         int y;
         Node *l, *r;
-        int size;
-        bool twist;
         T val;
-        // TODO define satellite data members
+
+        // TODO define subtree data
+        int size;
+
+        // TODO define lazy flags
+        bool reverse;
+        
         Node (const T& val) :
-            y(uni(rng)), l(nullptr), r(nullptr),
-            size(1), val(val), twist(false)
-        {
-            // TODO initialize satellite data for a single node
+            y(prio(rng)), l(nullptr), r(nullptr), val(val),
+            // TODO reset lazy flags
+            reverse(false)
+        { fix(); }
+
+        void fix () {
+            if (l && r) {
+                size = l->size + 1 + r->size;
+            } else if (l) {
+                size = l->size + 1;
+            } else if (r) {
+                size = 1 + r->size;
+            } else {
+                size = 1;
+            }
+        }
+
+        void push () {
+            /* lazy propagation template
+            if () {     // check lazy flag
+                // fix val
+                if (l) {
+                    // set lazy flag of left child
+                }
+                if (r) {
+                    // set lazy flag of right child
+                }
+                // reset lazy flag
+            }
+            */
+           if (reverse) {     // check lazy flag
+                // fix val
+                swap(l, r);
+                if (l) {
+                    // set lazy flag of left child
+                    l->reverse ^= 1;
+                }
+                if (r) {
+                    // set lazy flag of right child
+                    r->reverse ^= 1;
+                }
+                // reset lazy flag
+                reverse = false;
+            }
         }
     };
 
-    // TODO define null-safe getter functions
-    int sizeOf (Node* v) { return v == nullptr ? 0 : v->size; }
-    void fix (Node* v) {
-        if (v != nullptr) {
-            v->size = 1 + sizeOf(v->l) + sizeOf(v->r);
-            // TODO update attributes
-        }
-    }
-    // TODO lazy propagation
-    void push (Node* v) {
-        if (v != nullptr && v->twist) {
-            v->twist = false;
-            swap(v->l, v->r);
-            if (v->l != nullptr) v->l->twist ^= true;
-            if (v->r != nullptr) v->r->twist ^= true;
-        }
-    }
-
     void split (Node* v, int sx, Node*& sl, Node*& sr) {
-        if (v == nullptr) {
-            sl = sr = nullptr;
-        } else {
+        if (v) {
             push(v);
-            int x = sizeOf(v->l);
+            int x = v->l ? v->l->size : 0;
             if (sx <= x) {
                 split(v->l, sx, sl, v->l);
                 sr = v;
@@ -52,27 +75,39 @@ struct List {
                 sl = v;
             }
             fix(v);
-        }
-    }
-    void merge (Node*& v, Node* ml, Node* mr) {
-        push(ml);
-        push(mr);
-        if (ml == nullptr) {
-            v = mr;
-        } else if (mr == nullptr) {
-            v = ml;
-        } else if (ml->y < mr->y) {
-            merge(mr->l, ml, mr->l);
-            v = mr;
         } else {
-            merge(ml->r, ml->r, mr);
-            v = ml;
+            sl = sr = nullptr;
         }
-        fix(v);
     }
+
+    void merge (Node*& v, Node* ml, Node* mr) {
+        if (ml || mr) {
+            if (!ml) {
+                mr->push();
+                v = mr;
+            } else if (!mr) {
+                ml->push();
+                v = ml;
+            } else {
+                ml->push();
+                mr->push();
+                if (ml->y < mr->y) {
+                    merge(mr->l, ml, mr->l);
+                    v = mr;
+                } else {
+                    merge(ml->r, ml->r, mr);
+                    v = ml;
+                }
+            }
+            v->fix();
+        } else {
+            v = nullptr;
+        }
+    }
+
     Node* search (Node* v, int sx) {
         push(v);  // remeber to call push!
-        int x = sizeOf(v->l);
+        int x = v->l ? vl->size : 0;
         if (sx < x) {
             return search(v->l, sx);
         } else if (sx > x) {
@@ -84,25 +119,48 @@ struct List {
 
     Node* root;
     List () : root(nullptr) {}
+
     void insert (int i, const T& x) {
         Node *head, *tail;
         split(root, i, head, tail);
         merge(head, head, new Node(x));
         merge(root, head, tail);
     }
+
     T& operator[] (int i) {
         // assert(i >= 0 && i < sizeOf(root));
         return search(root, i)->val;
     }
+
+    void erase (int l, int r) {
+        Node *head, *body, *tail;
+        split(root, l, head, tail);
+        split(tail, r - l + 1, body, tail);
+        merge(root, head, tail);
+    }
+
+    void swap (int i, int j, int len) {
+        Node* v[5];
+        split(root, i, v[0], v[1]);
+        split(v[1], len, v[1], v[2]);
+        split(v[2], j - (i + len), v[2], v[3]);
+        split(v[3], len, v[3], v[4]);
+        merge(v[0], v[0], v[3]);
+        merge(v[2], v[2], v[1]);
+        merge(v[2], v[2], v[4]);
+        merge(root, v[0], v[2]);
+    }
+
     void reverse (int l, int r) {
         // assert(l <= r && l >= 0 && r < sizeOf(root));
         Node *head, *body, *tail;
         split(root, l, head, tail);
         split(tail, r - l + 1, body, tail);
-        body->twist ^= true;
+        body->reverse ^= true;
         merge(tail, body, tail);
         merge(root, head, tail);
     }
+
     void shiftRight (int l, int r) {
         Node *head, *body, *tail, *pivot;
         split(root, l, head, tail);
