@@ -1,4 +1,4 @@
-#include "analytical-formula.cpp"
+#include "combinations.cpp"
 
 // v: expansion of x in numerical base p
 // v[0] + v[1]*p + v[2]*p^2 + ... 
@@ -23,7 +23,7 @@ MB lucas (ll m, ll n) {  // TO BE TESTED
     MB ans = 1;
     for (int i = 0; i < k; i++) {
         if (u[i] < v[i]) ans = 0; // corolary of Lucas's Theorem
-        else ans *= combinations(u[i], v[i]);
+        else ans *= subsets(u[i], v[i]);
     }
     return ans;
 }

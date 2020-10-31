@@ -1,4 +1,5 @@
 #include "../mod-base.cpp"
+#include "../../fast-exponentiation/generic.cpp"
 
 // implements Pòlya Enumeration Theorem's formula
 // n: number of positions in each permutation
